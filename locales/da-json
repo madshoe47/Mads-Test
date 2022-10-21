@@ -1,0 +1,8 @@
+{
+  "general": {
+    "404": {
+      "title": "Denne side findes ikke",
+      "subtext_html": "Siden kan være blevet flyttet eller slettet. <br><a href=\"https://www.digst.dk/\">Gå til forsiden</a>."
+    }
+  }
+}
