@@ -16,7 +16,7 @@
                         {% if order.line_items.first.image %}
                         <img class="w-full h-full object-center object-contain"
                             src="{{ order.line_items.first.image | img_url: 'medium' }}"
-                            alt="{{ order.line_items.first.image.alt }}">
+                            alt="{{ order.line_items.first.image.alt }}" width="" height="" loading="lazy">
 
                         {% else %}
                         {{
