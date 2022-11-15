@@ -20,6 +20,26 @@
     [x-cloak] {
       display: none !important;
     }
+
+	.link-underline {
+		border-bottom-width: 0;
+		background-image: linear-gradient(transparent, transparent), linear-gradient(#fff, #fff);
+		background-size: 0 3px;
+		background-position: 5px 100%;
+		background-repeat: no-repeat;
+		transition: background-size .3s ease-in-out;
+    margin-bottom: -1px;
+	}
+
+	.link-underline-black {
+		background-image: linear-gradient(transparent, transparent), linear-gradient(#087500, #087500)
+	}
+
+	.link-underline:hover {
+		background-size: 100% 3px;
+		background-position: 0 100%
+	}
+
   </style>
 </head>
 
