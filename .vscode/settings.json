@@ -1,5 +1,3 @@
 {
-    "liquid.format.enable": false,
-    "liquid.format.markup": {
-    }
+  "recommendations": ["shopify.theme-check-vscode"]
 }

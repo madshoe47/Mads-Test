@@ -1,84 +1,162 @@
-<div class="flex flex-col items-center my-8">
-    {% if section.settings.title != blank %}
-    <h1 class="text-3xl font-medium my-8 md:my-16">{{ section.settings.title }}</h1>
-    {% endif %}
+{{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
 
-    {% form 'contact' %}
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
 
-    {% if form.errors %}
-    <div class="border p-5">
-        <div class="flex flex-row items-center w-full my-3">
-            <div class="text-red-500">
-                {% render 'icon-failed' %}
-            </div>
-            <div class="text-sm font-medium ml-3">
-                Oh no! Your message is not sent
-            </div>
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="contact page-width page-width--narrow section-{{ section.id }}-padding">
+    <h2 class="title title-wrapper--no-top-margin">{{ section.settings.heading | escape }}</h2>
+    {%- form 'contact', id: 'ContactForm', class: 'isolate' -%}
+      {%- if form.posted_successfully? -%}
+        <div class="form-status form-status-list form__message" tabindex="-1" autofocus>{% render 'icon-success' %} {{ 'templates.contact.form.post_success' | t }}</div>
+      {%- elsif form.errors -%}
+        <div class="form__message">
+          <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>{% render 'icon-error' %} {{ 'templates.contact.form.error_heading' | t }}</h2>
         </div>
-        <ul class="px-4 mb-3 ml-7 list-decimal">
-            {% for error in form.errors %}
-            <li>
-                <span>{{ form.errors.messages[error] }}</span>
-            </li>
-            {% endfor %}
+        <ul class="form-status-list caption-large" role="list">
+          <li>
+            <a href="#ContactForm-email" class="link">
+              {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+            </a>
+          </li>
         </ul>
-    </div>
-    {% elsif form.posted_successfully? %}
-    <div class="flex flex-row items-center w-full my-3 p-5">
-        <div class="text-green-500">
-            {% render 'icon-success' %}
+      {%- endif -%}
+      <div class="contact__fields">
+        <div class="field">
+          <input class="field__input" autocomplete="name" type="text" id="ContactForm-name" name="contact[{{ 'templates.contact.form.name' | t }}]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="{{ 'templates.contact.form.name' | t }}">
+          <label class="field__label" for="ContactForm-name">{{ 'templates.contact.form.name' | t }}</label>
         </div>
-        <div class="text-sm font-medium ml-3">Your message is sent successfully</div>
-    </div>
-    {% endif %}
-
-    <div class="max-w-6xl mx-auto justify-center flex-1 items-center px-4">
-        <div class="flex px-1 mb-3">
-            <div class="px-3 md:w-1/2">
-                <label class="uppercase text-xs text-gray-500 font-medium" for="contact_name">Name</label>
-                <input class="border py-3 px-4 mb-3 text-gray-700 w-full" type="text" name="contact[name]"
-                    id="contact_name">
-            </div>
-            <div class="px-3 md:w-1/2">
-                <label class="uppercase text-xs text-gray-500 font-medium" for="contact_email">Email address</label>
-                <input class="border py-3 px-4 mb-3 text-gray-700 w-full" type="email" name="contact[email]"
-                    id="contact_email">
-            </div>
+        <div class="field field--with-error">
+          <input
+            autocomplete="email"
+            type="email"
+            id="ContactForm-email"
+            class="field__input"
+            name="contact[email]"
+            spellcheck="false"
+            autocapitalize="off"
+            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+            aria-required="true"
+            {% if form.errors contains 'email' %}
+              aria-invalid="true"
+              aria-describedby="ContactForm-email-error"
+            {% endif %}
+            placeholder="{{ 'templates.contact.form.email' | t }}"
+          >
+          <label class="field__label" for="ContactForm-email">{{ 'templates.contact.form.email' | t }} <span aria-hidden="true">*</span></label>
+          {%- if form.errors contains 'email' -%}
+            <small class="contact__field-error" id="ContactForm-email-error">
+              <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
+              <span class="form__message">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</span>
+            </small>
+          {%- endif -%}
         </div>
-
-        <div class="flex px-1 mb-3">
-            <div class="w-full px-3">
-                <label class="uppercase text-xs text-gray-500 font-medium" for="contact_message">Message</label>
-                <textarea class="border py-3 px-4 mb-3 text-gray-700 w-full" name="contact[body]"
-                    id="contact_message"></textarea>
-            </div>
-        </div>
-
-        <div class="flex px-1 mb-3">
-            <div class="w-full px-3">
-                <input type="submit"
-                    class="w-full cursor-pointer px-4 py-2 border text-base font-medium bg-gray-900 text-white hover:bg-gray-700"
-                    value="Submit message">
-            </div>
-        </div>
-    </div>
-    {% endform %}
+      </div>
+      <div class="field">
+        <input type="tel" id="ContactForm-phone" class="field__input" autocomplete="tel" name="contact[{{ 'templates.contact.form.phone' | t }}]" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" placeholder="{{ 'templates.contact.form.phone' | t }}">
+        <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
+      </div>
+      <div class="field">
+        <textarea
+          rows="10"
+          id="ContactForm-body"
+          class="text-area field__input"
+          name="contact[{{ 'templates.contact.form.comment' | t }}]"
+          placeholder="{{ 'templates.contact.form.comment' | t }}"
+        >
+          {{- form.body -}}
+        </textarea>
+        <label class="form__label field__label" for="ContactForm-body">{{ 'templates.contact.form.comment' | t }}</label>
+      </div>
+      <div class="contact__button">
+        <button type="submit" class="button">
+          {{ 'templates.contact.form.send' | t }}
+        </button>
+      </div>
+    {%- endform -%}
+  </div>
 </div>
 
 {% schema %}
 {
-"name": "Contact Form",
-"settings": [
-{
-"type": "text",
-"id": "title",
-"label": "Title"
-}
-],
-"presets": [
-{
-"name": "Contact Form"
-}
-]
+  "name": "t:sections.contact-form.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Contact form",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.all.colors.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.contact-form.presets.name"
+    }
+  ]
 }
 {% endschema %}

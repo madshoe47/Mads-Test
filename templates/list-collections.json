@@ -1,11 +1,13 @@
 {
   "sections": {
-    "template": {
-      "type": "template-list-collections",
-      "settings": {}
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "image_ratio": "square"
+      }
     }
   },
   "order": [
-    "template"
+    "main"
   ]
 }

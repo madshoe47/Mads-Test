@@ -52,35 +52,11 @@
           
           {% render 'loader' %}
 
-          <div class="h-full flex flex-col bg-white shadow-xl overflow-y-scroll" id="cart_content">
+          <div class="h-full flex flex-col bg-white shadow-xl overflow-y-scroll" x-ref="cart_content">
             {% render 'cart-form' %}
           </div>
         </div>
       </div>
     </div>
 </div>
-
-
-<script>
-
-   updateCart(){
-            // send fetch reqeust to update cart
-            fetch('/?view=cart')
-            .then(response => response.text())
-            .then(cartData => {
-                let cart_content = document.getElementById('cart_content');
-                cart_content.innerHTML = cartData;
-
-                // This code is use to parse json object. for cart count
-                var el = document.createElement('div');
-                el.innerHTML = cartData;
-                var cartCount = JSON.parse(el.querySelector('[data-options]').innerHTML).item_count;
-                $dispatch('cart-count-updated', cartCount);
-                this.loading = false;
-
-            })
-        }
-     }
-
-</script>
   

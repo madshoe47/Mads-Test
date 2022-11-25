@@ -12,17 +12,34 @@ $btn-height: 44px;
     grid-template-columns: 1fr 2fr 1fr;
     .header__logo{
         grid-area: header-logo;
+        margin-left: 20px;
     }
     .header__menu{
         grid-area: header-menu;
+        margin: auto;
     }
     .header__icons{
         grid-area: header-icons;
+        margin-right: 20px;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
         grid-template-areas: "header-menu header-logo header-icons";
+
+        .header__logo {
+            margin: 10px auto;
+        }
+
+        .header__menu {
+            margin: 0;
+            margin-left: 5px;
+        }
+
+        .header__icons {
+            margin-right: 5px;
+        }
     }
+
     // submenu
     .nav__item{
         &:hover{

@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>{{ page_title }}
+  </title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="{{ page_description | escape }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+  {{ content_for_header }}
+  <!-- Header hook for plugins -->
+  {{ 'app.css' | asset_url | stylesheet_tag }}
+
+  <style>
+    [x-cloak] {
+      display: none !important;
+    }
+
+	.link-underline {
+		border-bottom-width: 0;
+		background-image: linear-gradient(transparent, transparent), linear-gradient(#fff, #fff);
+		background-size: 0 3px;
+		background-position: 5px 100%;
+		background-repeat: no-repeat;
+		transition: background-size .3s ease-in-out;
+    margin-bottom: -1px;
+	}
+
+	.link-underline-black {
+		background-image: linear-gradient(transparent, transparent), linear-gradient(#087500, #087500)
+	}
+
+	.link-underline:hover {
+		background-size: 100% 3px;
+		background-position: 0 100%
+	}
+
+  </style>
+</head>
+
+<body>
+
+  {% section 'header' %}
+  {% render 'cart-drawer' %}
+
+  <main role="main">
+    {{ content_for_layout }}
+  </main>
+</body>
+
+</html>

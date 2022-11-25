@@ -1,11 +1,11 @@
 {
   "sections": {
-    "template": {
-      "type": "template-search",
+    "main": {
+      "type": "main-search",
       "settings": {}
     }
   },
   "order": [
-    "template"
+    "main"
   ]
 }

@@ -2,7 +2,6 @@
 <div class="fixed inset-0 overflow-hidden z-20"
     x-data="{ showMenu: false }"
     x-show="showMenu"
-    x-cloak
     @toggle-menu.window="showMenu = !showMenu"
      aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
     <div class="absolute inset-0 overflow-hidden">
@@ -72,7 +71,7 @@
                                                     <li>
                                                         <a href="{{ submenu.url }}" class="w-full py-3 block text-sm animate-link">
                                                             <span class="inline-flex items-center">
-                                                                {{ submenu.title }}
+                                                                {{ submenu.title  }}
                                                             </span>
                                                         </a>
                                                     </li>

@@ -1,6 +1,6 @@
 <form action="{{ routes.cart_url }}" method="post" class="h-full relative">
 
-    <div class="flex justify-between items-center pb-3 pt-3 bg-white px-4 md:px-4 absolute top-0 left-0 z-20 mb-20 w-full">
+    <div class="flex justify-between items-center pb-3 pt-3 bg-white px-4 md:px-4">
         <h3 class="text-base font-semibold">
             {{ 'general.cart.title' | t }}
             {% if cart.item_count > 0 %}
@@ -11,9 +11,8 @@
             {{ 'general.cart.continue_shopping' | t }}
         </button>
     </div>
-    
-    <div class="pt-20 relative flex-1 px-4 sm:px-6 h-full">
-        <div class="absolute left-0 w-full px-4" style="top: 60px;">
+
+    <div class="mt-6 relative flex-1 px-4 sm:px-6 h-full">
         {% if cart.item_count > 0 %}
         <div class="flex flex-col overflow-y-scroll justify-between h-full pb-28 font-medium no-scrollbar relative">
             {% assign total_savings = 0 %}
@@ -99,11 +98,6 @@
                                         &plus;
                                     </button>
                                 </div>
-
-                                <div class="w-full flex justify-start mt-4">
-                                    <p class="mr-3">Subtotal: </p>
-                                    <p>{{ item.line_price | money }}</p>
-                                </div>
                                 
                             </div>
     
@@ -117,7 +111,6 @@
                         </div>
                     </div>  
                 {% endfor %}
-            </div>
             </div>
             <div class="max-w-xs md:max-w-md w-full bg-white border-t-2 border-gray-600 fixed bottom-0 right-0 p-4">
 
@@ -134,7 +127,12 @@
                     </div>
                 {%- endif -%}
 
-               
+                {% if total_savings > 0 %}
+                    <div class="sub-total flex justify-between text-base pb-2  text-red-700">
+                        <span> {{ 'general.cart.saving' | t }}</span>
+                        <span>-{{ total_savings | money_with_currency }}</span>
+                    </div>
+                {% endif %}
     
                 <div class="sub-total flex justify-between text-base pb-2">
                     <span> {{ 'general.cart.subtotal' | t }}</span>
@@ -147,11 +145,10 @@
                 </button>
     
             </div>
-        
         </div>
         {% else %}
             <div class="empty-cart text-center max-w-xs md:max-w-md px-4">
-                {% render 'icon-shopping-bag', class: 'mx-auto w-8 h-8' %}
+                {% render 'icon-cart', class: 'mx-auto w-8 h-8' %}
                 <h4 class="text-lg heading-font py-2 !font-bold"> {{ 'general.cart.cart_empty_title_html' | t }} </h4>
                 <button @click="$dispatch('toggle-cart')" type="button" class="inline-block mx-auto px-8 py-2 text-sm text-center  w-full font-medium">
                     {{ 'general.cart.continue_shopping' | t }}
@@ -159,6 +156,5 @@
             </div>
         {% endif %}
     </div>
-
 
 </form>
