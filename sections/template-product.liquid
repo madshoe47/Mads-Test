@@ -108,16 +108,18 @@
                             {% when 'quantity' %}
                                  <label for="product-quantity__wrapper">Quantity</label>
                                 <div class="product-quantity__wrapper grid grid-cols-3 border py-2 mt-2"
-                                x-data="{ 
-                                    quantity: 1,
-                                    minus(value) {
-                                       (this.quantity == 1) ? this.quantity = 1 : this.quantity -= value;
-                                    },
-                                    plus(value) {
-                                        this.quantity += value;
-
-                                    }
-                                }">
+                               x-data="{ 
+                    qty: 1,
+                    minus(value) {
+                      this.qty = parseInt(this.qty);
+                      (this.qty == 1) ? this.qty = 1 : this.qty -= value;
+                    },
+                    plus(value) {
+                      this.qty = parseInt(this.qty);
+                      this.qty += value;
+                    }
+                  }"
+                  x-init="$watch('qty', value =>  $dispatch('quantity-changed', { quantity: value }))">
         
                                     <button type="button" class="min-h-[48px] w-full flex items-center justify-center cursor-pointer" @click="minus(1)">
                                         <span class="sr-only">{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}</span>
@@ -126,7 +128,7 @@
 
                                     <input 
                                         type="number" 
-                                        x-model="quantity"
+                                        x-model="qty"
                                         name="quantity" 
                                         value="1" 
                                         min="1" 
@@ -144,7 +146,32 @@
                                 </div>
 
                             {% when 'checkout_buttons' %}
-                                <div class="my-3">
+                                <div class="my-3"
+                                x-data="{ 
+                qty: 1,
+                addToCart(){
+                  let formData = new FormData($refs.product_form);
+
+                  fetch('/cart/add.js', {
+                      method: 'POST',
+                      body: formData
+                    })
+                    .then(response => {
+                      return response.json();
+                    })
+                    .then(response => {
+                      this.$dispatch('cart-updated');
+                      this.$dispatch('toggle-cart');
+                    })
+                    .catch((error) => {
+                      console.error('Error:', error);
+                    });
+
+                }
+              }"
+              @quantity-changed.window="qty = $event.detail.quantity"
+                                
+                                >
                                     <button type="button" name="add" class="w-full px-6 py-4 bg-gray-900 text-white hover:bg-gray-700 rounded-sm my-2"
                                         {% if selected_variant.available == false %}
                                             disabled
@@ -199,7 +226,7 @@
 </div>
 <script>
 
-    const addToCartButton = document.querySelector('[name="add"]');
+ /*   const addToCartButton = document.querySelector('[name="add"]');
 
     addToCartButton.addEventListener('click', function() {
         let formData = new FormData(document.getElementById('product-form'));
@@ -213,13 +240,16 @@
             return response.json();
         })
         .then(response => {
-            console.log('response', response);
+            console.log(updatecart(), 'toggle-cart')
+            this.dispatch(updateCart())
+            this.dispatch(togglecart())
+            
         })
         .catch((error) => {
             console.error('Error:', error);
         });
     });
-
+*/
 
     class VariantSelector extends HTMLElement {
         constructor() {

@@ -11,9 +11,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
   {{ content_for_header }}
   <!-- Header hook for plugins -->
-  {{ 'tailwind.css' | asset_url | stylesheet_tag }}
-
-  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
+  {{ 'app.css' | asset_url | stylesheet_tag }}
 
   <style>
     [x-cloak] {
@@ -45,6 +43,7 @@
 <body>
 
   {% section 'header' %}
+  {% render 'cart-drawer' %}
 
   <main role="main">
     {{ content_for_layout }}
