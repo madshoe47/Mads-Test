@@ -20,11 +20,10 @@
     <div id="muteYouTubeVideoPlayer min-w-full min-h-full absolute object-cover"></div>
                             <script async src="https://www.youtube.com/iframe_api"></script>
                             <script>
-                                let videoID = "{{ section.settings.video_url | split: '=' | last }}";
                                 function onYouTubeIframeAPIReady() {
                                     var player;
                                     player = new YT.Player('muteYouTubeVideoPlayer', {
-                                        videoId: videoID, // YouTube Video ID
+                                        videoId: "{{ section.settings.video_url | split: '=' | last }}", // YouTube Video ID
                                         playerVars: {
                                             autoplay: 1, // Auto-play the video on load
                                             controls: 0, // Show pause/play buttons in player
