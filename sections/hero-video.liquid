@@ -17,7 +17,38 @@
         </a>
       </div>
     </noscript>
-     <iframe src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?enablejsapi=1" class="js-youtube min-w-full min-h-full absolute object-cover" allow="autoplay; encrypted-media; loop, muted" title="{{ section.settings.description | escape }}"></iframe>
+    <div id="muteYouTubeVideoPlayer min-w-full min-h-full absolute object-cover"></div>
+                            <script async src="https://www.youtube.com/iframe_api"></script>
+                            <script>
+                                let videoID = "{{ section.settings.video_url | split: '=' | last }}";
+                                function onYouTubeIframeAPIReady() {
+                                    var player;
+                                    player = new YT.Player('muteYouTubeVideoPlayer', {
+                                        videoId: videoID, // YouTube Video ID
+                                        playerVars: {
+                                            autoplay: 1, // Auto-play the video on load
+                                            controls: 0, // Show pause/play buttons in player
+                                            showinfo: 0, // Hide the video title
+                                            modestbranding: 0, // Hide the Youtube Logo
+                                            loop: 1, // Run the video in a loop
+                                            fs: 0, // Hide the full screen button
+                                            cc_load_policy: 0, // Hide closed captions
+                                            iv_load_policy: 3, // Hide the Video Annotations
+                                            autohide: 0, // Hide video controls when playing
+                                            rel: 0 
+                                        },
+                                        events: {
+                                            onReady: function(e) {
+                                                e.target.setVolume(0);
+                                            }
+                                        }
+                                    });
+                                }
+
+                                // Written by @labnol
+
+                            </script>
+     {%- comment -%} <iframe src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?enablejsapi=1" class="js-youtube min-w-full min-h-full absolute object-cover" allow="autoplay; encrypted-media; loop, muted" title="{{ section.settings.description | escape }}"></iframe> {%- endcomment -%}
   </div>
   <div class="video-content space-y-2 mx-auto">
     {% if section.settings.logo != blank %}
