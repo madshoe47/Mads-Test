@@ -1,7 +1,22 @@
 {
   "sections": {
+    "hero-video": {
+      "type": "hero-video",
+      "settings": {
+        "cover_image": "shopify:\/\/shop_images\/weight-lifting-man.jpg",
+        "video_url": "https:\/\/www.youtube.com\/watch?v=2UFawfIJhV8",
+        "button": true,
+        "scroll_down": true,
+        "page_divider": true,
+        "logo": "shopify:\/\/shop_images\/Logo_Mads_Hoe_Motorsport.png",
+        "logo_width": 150
+      }
+    },
     "index-homepage": {
-      "type": "index-homepage"
+      "type": "index-homepage",
+      "disabled": true,
+      "settings": {
+      }
     },
     "image_banner": {
       "type": "image-banner",
@@ -149,14 +164,6 @@
         "padding_bottom": 36
       }
     },
-    "hero-video": {
-      "type": "hero-video",
-      "disabled": true,
-      "settings": {
-        "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc"
-      }
-    },
-
     "multicolumn": {
       "type": "multicolumn",
       "disabled": true,
