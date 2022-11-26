@@ -18,7 +18,7 @@
       </div>
     </noscript>
     <div class='youtube-container min-w-full min-h-full absolute object-cover'>
-    <iframe class="min-w-full min-h-full absolute object-cover" src='https://www.youtube.com/embed/{{ section.settings.video_url | split: '=' | last }}?controls=0&showinfo=0&playsinline=1&autoplay=1&mute=1&loop=1&playlist={{ section.settings.video_url | split: '=' | last }}'></iframe>
+    <iframe class="min-w-full min-h-full absolute object-cover" src='https://www.youtube.com/embed/{{ section.settings.video_url | split: '=' | last }}?controls=0&showinfo=0&playsinline=1&autoplay=1&mute=1&loop=1showinfo=0&modestbranding=0&playlist={{ section.settings.video_url | split: '=' | last }}'></iframe>
 </div> 
     
      {%- comment -%} <iframe src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?enablejsapi=1" class="js-youtube min-w-full min-h-full absolute object-cover" allow="autoplay; encrypted-media; loop, muted" title="{{ section.settings.description | escape }}"></iframe> {%- endcomment -%}
