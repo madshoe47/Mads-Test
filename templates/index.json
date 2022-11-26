@@ -149,6 +149,14 @@
         "padding_bottom": 36
       }
     },
+    "hero-video": {
+      "type": "hero-video",
+      "disabled": true,
+      "settings": {
+        "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc"
+      }
+    },
+
     "multicolumn": {
       "type": "multicolumn",
       "disabled": true,
@@ -202,6 +210,7 @@
     }
   },
   "order": [
+    "hero-video",
     "index-homepage",
     "image_banner",
     "rich_text",

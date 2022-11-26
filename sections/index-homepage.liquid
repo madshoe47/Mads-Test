@@ -1,61 +1,62 @@
-<section class="relative h-[90vh] flex flex-col items-center justify-center text-center text-white py-0 px-3">
+{%- comment -%}
+  <section class="relative h-[90vh] flex flex-col items-center justify-center text-center text-white py-0 px-3">
   <div class="video-docker absolute top-0 left-0 w-full h-full overflow-hidden">
-    <video class="min-w-full min-h-full absolute object-cover" src="https://josecuono.dev/video1.mp4" type="video/mp4" autoplay muted loop preload="auto" poster="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.etonline.com%2Fhawkeye-directors-break-down-that-one-take-car-chase-in-episode-3-exclusive-176037&psig=AOvVaw05LtCJQDq82LEDzM5qhxd-&ust=1669510159977000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJDV6JTQyvsCFQAAAAAdAAAAABAF"></video>
+  <video class="min-w-full min-h-full absolute object-cover" src="https://josecuono.dev/video1.mp4" type="video/mp4" autoplay muted loop preload="auto" poster="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.etonline.com%2Fhawkeye-directors-break-down-that-one-take-car-chase-in-episode-3-exclusive-176037&psig=AOvVaw05LtCJQDq82LEDzM5qhxd-&ust=1669510159977000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJDV6JTQyvsCFQAAAAAdAAAAABAF"></video>
   </div>
   <div class="video-content space-y-2 mx-auto">
-    {% if section.settings.logo != blank %}
-      <a href="/" class="header__logo">
-        {{ section.settings.logo | image_url: width: 400 | image_tag: loading: 'lazy' }}
-      </a>
-    {% else %}
-      <a href="/" class="header__logo-title">
-        {{ shop.name }}
-      </a>
-    {% endif %}
-    <h3 class="font-light text-3xl">Velkommen til<br>Bamboo Performance!</h3>
-    <a href="#productFrontpage" class="bg-green-600 text-white py-2 px-4 mt-2 rounded-md hidden lg:block">Køb nu!</a>
+  {% if section.settings.logo != blank %}
+  <a href="/" class="header__logo">
+  {{ section.settings.logo | image_url: width: 400 | image_tag: loading: 'lazy' }}
+  </a>
+  {% else %}
+  <a href="/" class="header__logo-title">
+  {{ shop.name }}
+  </a>
+  {% endif %}
+  <h3 class="font-light text-3xl">Velkommen til<br>Bamboo Performance!</h3>
+  <a href="#productFrontpage" class="bg-green-600 text-white py-2 px-4 mt-2 rounded-md hidden lg:block">Køb nu!</a>
   </div>
 
   <div class="arrow_container">
-    <a href="#productFrontpage">
+  <a href="#productFrontpage">
   <div class="chevron"></div>
   <div class="chevron"></div>
   <div class="chevron"></div>
   <span class="text">Scroll ned</span>
-    </a>
-</div>
+  </a>
+  </div>
 
   <div style="overflow: hidden;" class="element-page-divider">
   <svg preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" style="fill: #ffffff;width: 100%;height: 70px;transform: scaleX(-1);">
-    <path d="M0 0v46.29c47.79 22.2 103.59 32.17 158 28 70.36-5.37 136.33-33.31 206.8-37.5 73.84-4.36 147.54 16.88 218.2 35.26 69.27 18 138.3 24.88 209.4 13.08 36.15-6 69.85-17.84 104.45-29.34C989.49 25 1113-14.29 1200 52.47V0z" opacity=".50"></path>
-    <path d="M0 0v15.81c13 21.11 27.64 41.05 47.69 56.24C99.41 111.27 165 111 224.58 91.58c31.15-10.15 60.09-26.07 89.67-39.8 40.92-19 84.73-46 130.83-49.67 36.26-2.85 70.9 9.42 98.6 31.56 31.77 25.39 62.32 62 103.63 73 40.44 10.79 81.35-6.69 119.13-24.28s75.16-39 116.92-43.05c59.73-5.85 113.28 22.88 168.9 38.84 30.2 8.66 59 6.17 87.09-7.5 22.43-10.89 48-26.93 60.65-49.24V0z" opacity=".75"></path>
-    <path d="M0 0v5.63C149.93 59 314.09 71.32 475.83 42.57c43-7.64 84.23-20.12 127.61-26.46 59-8.63 112.48 12.24 165.56 35.4C827.93 77.22 886 95.24 951.2 90c86.53-7 172.46-45.71 248.8-84.81V0z"></path>
+  <path d="M0 0v46.29c47.79 22.2 103.59 32.17 158 28 70.36-5.37 136.33-33.31 206.8-37.5 73.84-4.36 147.54 16.88 218.2 35.26 69.27 18 138.3 24.88 209.4 13.08 36.15-6 69.85-17.84 104.45-29.34C989.49 25 1113-14.29 1200 52.47V0z" opacity=".50"></path>
+  <path d="M0 0v15.81c13 21.11 27.64 41.05 47.69 56.24C99.41 111.27 165 111 224.58 91.58c31.15-10.15 60.09-26.07 89.67-39.8 40.92-19 84.73-46 130.83-49.67 36.26-2.85 70.9 9.42 98.6 31.56 31.77 25.39 62.32 62 103.63 73 40.44 10.79 81.35-6.69 119.13-24.28s75.16-39 116.92-43.05c59.73-5.85 113.28 22.88 168.9 38.84 30.2 8.66 59 6.17 87.09-7.5 22.43-10.89 48-26.93 60.65-49.24V0z" opacity=".75"></path>
+  <path d="M0 0v5.63C149.93 59 314.09 71.32 475.83 42.57c43-7.64 84.23-20.12 127.61-26.46 59-8.63 112.48 12.24 165.56 35.4C827.93 77.22 886 95.24 951.2 90c86.53-7 172.46-45.71 248.8-84.81V0z"></path>
   </svg>
-</div>
-</section>
+  </div>
+  </section>
 
 
-<style>
+  <style>
   .video-docker video {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   }
   .video-docker::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
   }
 
   .video-content {
-    z-index: 2;
-    position: relative;
-    bottom: 10vh;
+  z-index: 2;
+  position: relative;
+  bottom: 10vh;
   }
 
   .arrow_container {
@@ -65,47 +66,47 @@
   margin: 0px auto;
   z-index: 10;
   top: 14vh;
-}
+  }
 
-.chevron {
+  .chevron {
   position: absolute;
   width: 28px;
   height: 8px;
   opacity: 0;
   transform: scale3d(0.5, 0.5, 0.5);
   animation: move 3s ease-out infinite;
-}
+  }
 
-.chevron:before,
-.chevron:after {
+  .chevron:before,
+  .chevron:after {
   content: ' ';
   position: absolute;
   top: 0;
   height: 100%;
   width: 51%;
   background: #fff;
-}
- 
-.chevron:before {
+  }
+
+  .chevron:before {
   left: 0;
   transform: skew(0deg, 30deg);
-}
- 
-.chevron:after {
+  }
+
+  .chevron:after {
   right: 0;
   width: 50%;
   transform: skew(0deg, -30deg);
-}
+  }
 
-.chevron:first-child {
+  .chevron:first-child {
   animation: move 3s ease-out 1s infinite;
-}
- 
-.chevron:nth-child(2) {
-  animation: move 3s ease-out 2s infinite;
-}
+  }
 
-.text {
+  .chevron:nth-child(2) {
+  animation: move 3s ease-out 2s infinite;
+  }
+
+  .text {
   display: block;
   margin-top: 75px;
   margin-left: -30px;
@@ -116,41 +117,42 @@
   white-space: nowrap;
   opacity: .25;
   animation: pulse 2s linear alternate infinite;
-}
-
-@keyframes pulse { 
-to {
-    opacity: 1;
   }
-}
-@keyframes move {
+
+  @keyframes pulse { 
+  to {
+  opacity: 1;
+  }
+  }
+  @keyframes move {
   25% {
-    opacity: 1;
- 
+  opacity: 1;
+
   }
   33% {
-    opacity: 1;
-    transform: translateY(30px);
+  opacity: 1;
+  transform: translateY(30px);
   }
   67% {
-    opacity: 1;
-    transform: translateY(40px);
+  opacity: 1;
+  transform: translateY(40px);
   }
   100% {
-    opacity: 0;
-    transform: translateY(55px) scale3d(0.5, 0.5, 0.5);
+  opacity: 0;
+  transform: translateY(55px) scale3d(0.5, 0.5, 0.5);
   }
-}
+  }
 
   .element-page-divider {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    z-index: 2;
-    transform: rotateZ(180deg);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  z-index: 2;
+  transform: rotateZ(180deg);
   }
 
 
-</style>
+  </style>
+{%- endcomment -%}
