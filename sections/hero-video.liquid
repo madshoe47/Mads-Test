@@ -22,9 +22,9 @@
       <div class="video-section__poster media media--transparent media--landscape">
         <img src="{{ section.settings.cover_image | img_url: '1920x' }}" alt="{{ section.settings.description | escape }}">
       </div>
-      <div class="video-section__video media media--transparent media--landscape">
-        <iframe src="{{ section.settings.video_url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
+      <div class='youtube-container min-w-full min-h-full absolute object-cover hidden lg:block'>
+ <iframe class="min-w-full min-h-full absolute object-cover" src='https://www.youtube.com/embed/{{ section.settings.video_url | split: '=' | last }}?controls=0&showinfo=0&playsinline=1&autoplay=1&mute=1&loop=1&showinfo=0&modestbranding=0&playlist={{ section.settings.video_url | split: '=' | last }}'></iframe>
+</div>  
     </div>
     </div>
 
