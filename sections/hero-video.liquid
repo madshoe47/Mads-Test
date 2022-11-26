@@ -18,14 +18,14 @@
       </div>
     </noscript>
     <!-- Video herobanner with Iframe which are looping and autoplaying. It shall also be 50% masked with a black color -->
-    <div class='youtube-container min-w-full min-h-full absolute object-cover'>
-        <img src="{{ section.settings.cover_image | img_url: '1920x' }}" alt="{{ section.settings.description | escape }}">
+    <div class='youtube-container min-w-full min-h-full object-cover'>
+        <img class="absolute" src="{{ section.settings.cover_image | img_url: '1920x' }}" alt="{{ section.settings.description | escape }}">
         <iframe class="min-w-full min-h-full absolute object-cover" src='https://www.youtube.com/embed/{{ section.settings.video_url | split: '=' | last }}?controls=0&showinfo=0&playsinline=1&autoplay=1&mute=1&loop=1&showinfo=0&modestbranding=0&playlist={{ section.settings.video_url | split: '=' | last }}'></iframe>
     </div>  
 </div> 
-  <div class="video-content space-y-2 mx-auto">
+  <div class="video-content space-y-2 mx-auto h-fit flex flex-col justify-between gap-3">
     {% if section.settings.logo != blank %}
-      <a href="/" class="header__logo">
+      <a href="/" class="header__logo h-[100px]">
         {{ section.settings.logo | image_url: width: 400 | image_tag: loading: 'lazy' }}
       </a>
     {% else %}
