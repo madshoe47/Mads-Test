@@ -1,5 +1,8 @@
 {
   "sections": {
+    "index-homepage": {
+      "type": "index-homepage"
+    },
     "image_banner": {
       "type": "image-banner",
       "disabled": true,
@@ -199,6 +202,7 @@
     }
   },
   "order": [
+    "index-homepage",
     "image_banner",
     "rich_text",
     "featured_collection",

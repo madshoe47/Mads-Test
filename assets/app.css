@@ -673,6 +673,9 @@ video {
 .mb-6 {
   margin-bottom: 1.5rem;
 }
+.mb-20 {
+  margin-bottom: 5rem;
+}
 .block {
   display: block;
 }
@@ -1654,6 +1657,14 @@ video {
 }
 
 @media (min-width: 1024px) {
+
+  .lg\:flex {
+    display: flex;
+  }
+
+  .lg\:hidden {
+    display: none;
+  }
 
   .lg\:w-1\/2 {
     width: 50%;
