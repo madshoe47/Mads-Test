@@ -724,6 +724,9 @@ video {
 .h-\[42px\] {
   height: 42px;
 }
+.h-screen {
+  height: 100vh;
+}
 .min-h-\[22px\] {
   min-height: 22px;
 }
@@ -732,6 +735,9 @@ video {
 }
 .min-h-screen {
   min-height: 100vh;
+}
+.min-h-full {
+  min-height: 100%;
 }
 .w-10 {
   width: 2.5rem;
@@ -789,6 +795,9 @@ video {
 }
 .min-w-\[22px\] {
   min-width: 22px;
+}
+.min-w-full {
+  min-width: 100%;
 }
 .max-w-\[200px\] {
   max-width: 200px;
@@ -929,6 +938,11 @@ video {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.75rem * var(--tw-space-x-reverse));
   margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
+}
+.space-y-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 .divide-y > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-y-reverse: 0;
@@ -1131,6 +1145,10 @@ video {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
+.py-0 {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
 .pt-8 {
   padding-top: 2rem;
 }
@@ -1213,6 +1231,10 @@ video {
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
 .font-medium {
   font-weight: 500;
 }
@@ -1227,6 +1249,9 @@ video {
 }
 .\!font-bold {
   font-weight: 700 !important;
+}
+.font-light {
+  font-weight: 300;
 }
 .uppercase {
   text-transform: uppercase;
