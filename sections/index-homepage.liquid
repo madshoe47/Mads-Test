@@ -1,9 +1,17 @@
-<section class="relative h-screen flex flex-col items-center justify-center text-center text-white py-0 px-3">
+<section class="relative h-8/12 flex flex-col items-center justify-center text-center text-white py-0 px-3">
   <div class="video-docker absolute top-0 left-0 w-full h-full overflow-hidden">
     <video class="min-w-full min-h-full absolute object-cover" src="https://josecuono.dev/video1.mp4" type="video/mp4" autoplay muted loop></video>
   </div>
   <div class="video-content space-y-2 mx-auto">
-    <img src="../assets/pictures/Logo.png" alt="logo">
+    {% if section.settings.logo != blank %}
+      <a href="/" class="header__logo">
+        {{ section.settings.logo | image_url: width: 400 | image_tag: loading: 'lazy' }}
+      </a>
+    {% else %}
+      <a href="/" class="header__logo-title">
+        {{ shop.name }}
+      </a>
+    {% endif %}
     <h3 class="font-light text-3xl">Velkommen til<br>Bamboo Performance!</h3>
   </div>
 </section>
