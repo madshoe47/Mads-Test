@@ -17,7 +17,7 @@
         </a>
       </div>
     </noscript>
-    <iframe class="min-w-full min-h-full absolute object-cover" src="{{ section.settings.video_url.id }}" autoplay=1 muted=1 loop=1 controls=0 preload="auto"></iframe>
+     <iframe src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?enablejsapi=1" class="js-youtube min-w-full min-h-full absolute object-cover" allow="autoplay; encrypted-media; loop, muted" title="{{ section.settings.description | escape }}"></iframe>
   </div>
   <div class="video-content space-y-2 mx-auto">
     {% if section.settings.logo != blank %}
@@ -207,6 +207,12 @@ to {
       "placeholder": "t:sections.hero-video.settings.video_url.placeholder",
       "info": "t:sections.hero-video.settings.video_url.info"
     },
+     {
+        "type": "text",
+        "id": "description",
+        "label": "t:sections.hero-video.settings.description.label",
+        "info": "t:sections.hero-video.settings.description.info"
+      },
     {
       "type": "checkbox",
       "id": "button",
