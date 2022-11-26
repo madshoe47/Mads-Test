@@ -1389,7 +1389,7 @@ html {
   grid-area: header-icons;
   margin-right: 20px;
 }
-@media (max-width: 1025px) {
+@media (max-width: 1023px) {
   .header {
     grid-template-areas: "header-menu header-logo header-icons";
   }
