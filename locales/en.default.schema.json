@@ -458,6 +458,43 @@
             }
           }
         },
+        "hero-video": {
+          "name": "Hero Video",
+          "settings": {
+            "cover_image": {
+              "label": "Cover image"
+            },
+              "video_url": {
+              "label": "URL",
+              "info": "Video plays",
+              "placeholder": "Use a YouTube or Vimeo URL"
+            },
+            "button": {
+              "label": "Button",
+              "info": "Show button on video or not (Only for desktop)"
+            },
+            "scroll-down": {
+              "label": "Scroll down",
+              "info": "Show scroll down animation or not"
+            },
+            "page-divider": {
+              "label": "Page divider",
+              "info": "Show page divider or not"
+            },
+            "logo": {
+              "label": "Logo",
+              "info": "Chose logo to show on video"
+            },
+            "logo_width": {
+              "label": "Logo width",
+              "info": "Logo width in pixels",
+              "unit": "px"
+            }
+          },
+          "presets": {
+            "name": "Hero Video"
+          }
+        },
         "video": {
           "name": "Video",
           "settings": {

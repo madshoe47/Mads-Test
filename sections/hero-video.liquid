@@ -17,7 +17,7 @@
         </a>
       </div>
     </noscript>
-    <video class="min-w-full min-h-full absolute object-cover" src="{{ section.settings.video_url.id }}" autoplay muted loop preload="auto"></video>
+    <iframe class="min-w-full min-h-full absolute object-cover" src="{{ section.settings.video_url.id }}" autoplay=1 muted=1 loop=1 controls=0 preload="auto"></iframe>
   </div>
   <div class="video-content space-y-2 mx-auto">
     {% if section.settings.logo != blank %}
@@ -76,12 +76,12 @@
   }
 
   .arrow_container {
-  position: relative;
+  position: absolute;
   width: 24px;
   height: 24px;
   margin: 0px auto;
   z-index: 10;
-  top: 14vh;
+  bottom: 20vh;
 }
 
 .chevron {
@@ -173,7 +173,7 @@ to {
 
 {% schema %}
 {
-  "name": "t:sections.vhero-ideo.name",
+  "name": "t:sections.hero-video.name",
   "tag": "section",
   "class": "section",
   "settings": [
