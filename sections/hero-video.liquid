@@ -7,10 +7,10 @@
         {%- comment -%} <iframe class="min-w-full min-h-full absolute object-cover hidden lg:block" src='https://www.youtube.com/embed/{{ section.settings.video_url | split: '=' | last }}?controls=0&showinfo=0&playsinline=1&autoplay=1&mute=1&loop=1&showinfo=0&modestbranding=0&playlist={{ section.settings.video_url | split: '=' | last }}'></iframe> {%- endcomment -%}
     </div>  
 </div> 
-  <div class="video-content space-y-4 mx-auto">
+  <div class="video-content space-y-6 mx-auto">
     {% if section.settings.logo != blank %}
       <a href="/" class="header__logo h-[100px]">
-        {{ section.settings.logo | image_url: width: 400 | image_tag: loading: 'lazy' }}
+        {{ section.settings.logo | image_ul: width: 400 | image_tag: loading: 'lazy' }}
       </a>
     {% else %}
       <a href="/" class="header__logo-title">
@@ -18,7 +18,7 @@
       </a>
     {% endif %}
     <h3 class="font-light text-3xl">Velkommen til<br>Bamboo Performance!</h3>
-    <a href="#productFrontpage" class="bg-green-600 text-white py-2 px-4 mt-4 rounded-md hidden {% if section.settings.button == false %} hidden {% else %} lg:block {% endif %}">Køb nu!</a>
+    <a href="#productFrontpage" class="bg-green-600 text-white py-2 px-4 mt-6 rounded-md hidden {% if section.settings.button == false %} hidden {% else %} lg:block {% endif %}">Køb nu!</a>
   </div>
 
   <div class="arrow_container {% if section.settings.scroll_down == false %} hidden {% endif %}">
@@ -179,21 +179,10 @@ to {
   "class": "section",
   "settings": [
     {
-      "type": "image_picker",
-      "id": "cover_image",
-      "label": "t:sections.hero-video.settings.cover_image.label"
-    },
-    {
       "type": "video",
       "id": "video",
       "label": "t:sections.hero-video.settings.video_url.label"
     },
-     {
-        "type": "text",
-        "id": "description",
-        "label": "t:sections.hero-video.settings.description.label",
-        "info": "t:sections.hero-video.settings.description.info"
-      },
     {
       "type": "checkbox",
       "id": "button",
