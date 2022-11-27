@@ -3,6 +3,7 @@
     "hero-video": {
       "type": "hero-video",
       "settings": {
+        "video": "shopify:\/\/files\/videos\/Bamboo Performance - uden titler V3_muted_trimmed_resized (1) (3).mp4",
         "description": "",
         "button": true,
         "scroll_down": true,
