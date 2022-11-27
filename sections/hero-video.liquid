@@ -9,9 +9,9 @@
 </div> 
   <div class="video-content space-y-6 mx-auto">
     {% if section.settings.logo != blank %}
-      <a href="/" class="header__logo h-[100px]">
+      <div class="header__logo h-[100px]">
         {{ section.settings.logo | image_ul: width: section.settings.logo_width }}
-      </a>
+      </div>
     {% else %}
       <a href="/" class="header__logo-title">
         {{ shop.name }}
