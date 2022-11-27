@@ -19,7 +19,7 @@
     </noscript>
     <!-- Video herobanner with Iframe which are looping and autoplaying. It shall also be 50% masked with a black color -->
     <div class='youtube-container min-w-full min-h-full object-cover'>
-        {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, class: 'min-w-full min-h-full object-cover absolute top-0 left-0' }}
+        {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false playsinline: true, preload: "auto", class: 'min-w-full min-h-full object-cover absolute top-0 left-0' }}
     
 
         {%- comment -%} <iframe class="min-w-full min-h-full absolute object-cover hidden lg:block" src='https://www.youtube.com/embed/{{ section.settings.video_url | split: '=' | last }}?controls=0&showinfo=0&playsinline=1&autoplay=1&mute=1&loop=1&showinfo=0&modestbranding=0&playlist={{ section.settings.video_url | split: '=' | last }}'></iframe> {%- endcomment -%}
