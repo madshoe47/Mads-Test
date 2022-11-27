@@ -1,7 +1,7 @@
 <section class="relative h-[90vh] flex flex-col items-center justify-center text-center text-white py-0 px-3">
   <div class="video-docker overflow-hidden">
     <div class='youtube-container absolute top-0 left-0 min-w-full min-h-full object-cover'>
-        {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false playsinline: true, preload: auto, height: 100%, class: 'min-w-full min-h-full object-cover absolute top-0 left-0' }}
+        {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, class: 'min-w-full min-h-full h-[100%] object-cover absolute top-0 left-0' }}
     
 
         {%- comment -%} <iframe class="min-w-full min-h-full absolute object-cover hidden lg:block" src='https://www.youtube.com/embed/{{ section.settings.video_url | split: '=' | last }}?controls=0&showinfo=0&playsinline=1&autoplay=1&mute=1&loop=1&showinfo=0&modestbranding=0&playlist={{ section.settings.video_url | split: '=' | last }}'></iframe> {%- endcomment -%}
