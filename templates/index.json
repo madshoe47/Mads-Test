@@ -3,8 +3,7 @@
     "hero-video": {
       "type": "hero-video",
       "settings": {
-        "cover_image": "shopify:\/\/shop_images\/weight-lifting-man.jpg",
-        "video_url": "https:\/\/www.youtube.com\/watch?v=2UFawfIJhV8",
+        "description": "",
         "button": true,
         "scroll_down": true,
         "page_divider": true,
