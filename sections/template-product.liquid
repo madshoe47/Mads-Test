@@ -1,3 +1,6 @@
+{%- assign product = section.settings.product -%}
+{% assign selected_variant = product.selected_or_first_available_variant %}
+
 <div class="bg-white">
   <div class="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
     <div class="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
@@ -231,6 +234,7 @@
           return variant;
         
 
+
       });
       console.log(this.currentVariant);
     }
@@ -238,6 +242,7 @@
       if (!this.currentVariant) 
         return;
       
+
 
       window.history.replaceState({}, '', `${
         this.dataset.url
@@ -266,6 +271,7 @@
         if (oldPrice && newPrice) 
           oldPrice.innerHTML = newPrice.innerHTML;
         
+
 
       });
     }
