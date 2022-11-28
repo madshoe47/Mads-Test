@@ -17,6 +17,12 @@
       "settings": {
       }
     },
+     "main-product-show": {
+      "type": "main-product-show",
+      "disabled": true,
+      "settings": {
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "disabled": true,
@@ -216,6 +222,7 @@
     }
   },
   "order": [
+    "main-product-show",
     "hero-video",
     "index-homepage",
     "image_banner",
