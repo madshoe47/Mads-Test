@@ -13,6 +13,7 @@
     },
     "main-product-show": {
       "type": "main-product-show",
+      "disabled": true,
       "blocks": {
         "3fe4f204-44b9-40d8-bc0d-3644bf51b046": {
           "type": "title",
@@ -65,6 +66,16 @@
     },
     "template-product": {
       "type": "template-product",
+      "blocks": {
+        "fd44994d-a41b-4491-a308-5425e89681f7": {
+          "type": "variant_selector",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "fd44994d-a41b-4491-a308-5425e89681f7"
+      ],
       "settings": {
         "product": "bamboo-shirt"
       }
