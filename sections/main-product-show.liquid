@@ -88,15 +88,7 @@
   <div class="max-w-6xl mx-auto my-8">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
       <div class="product--medias">
-        <div class="hidden md:block">
-          {% for media in product.media %}
-            <div class="h-100 overflow-hidden p-2">
-              {% render 'product-media', media: media %}
-            </div>
-          {% endfor %}
-        </div>
-
-        <div class="md:hidden">
+        <div class="">
           <div class="swiper mySwiper2" style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff">
             <div class="swiper-wrapper">
               {% for media in product.media %}
@@ -285,6 +277,7 @@
         
 
 
+
       });
       console.log(this.currentVariant);
     }
@@ -292,6 +285,7 @@
       if (!this.currentVariant) 
         return;
       
+
 
 
       window.history.replaceState({}, '', `${
