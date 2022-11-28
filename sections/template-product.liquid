@@ -70,7 +70,7 @@
                   {% unless product.has_only_default_variant %}
                     <variant-selector data-url="{{ product.url }}" data-section="{{ section.id }}">
                       {% for option in product.options_with_values %}
-                        <label for="Option-{{ section.id }}-{{ forloop.index0 }}">Please chosse {{ option.name }}</label>
+                        <label for="Option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
                         <div class="flex items-center space-x-3">
                           {% for value in option.values %}
                             <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" name="{{ option.name }}" value="{{ value | escape }}" form="{{ product_form_id }}" class="sr-only" aria-labelledby="color-choice-0-label" {% if option.selected_value == value %}checked{% endif %}>
