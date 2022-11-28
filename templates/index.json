@@ -11,14 +11,54 @@
         "logo_width": 350
       }
     },
-    "index-homepage": {
-      "type": "index-homepage",
-      "disabled": true,
+    "main-product-show": {
+      "type": "main-product-show",
+      "blocks": {
+        "3fe4f204-44b9-40d8-bc0d-3644bf51b046": {
+          "type": "title",
+          "settings": {
+          }
+        },
+        "99b4f43d-375b-4455-949f-c60c46ca4026": {
+          "type": "price",
+          "settings": {
+          }
+        },
+        "c0b30158-3652-4f03-8123-bf03fb8ab990": {
+          "type": "description",
+          "settings": {
+          }
+        },
+        "fd46ef4d-70a1-46ec-a31a-101599c9631c": {
+          "type": "variant_selector",
+          "settings": {
+          }
+        },
+        "f7eeda0b-3256-43ab-aaf5-2ba97d558f91": {
+          "type": "quantity",
+          "settings": {
+          }
+        },
+        "0afe36f9-4004-4b62-97bd-72a5fe6f1dea": {
+          "type": "checkout_buttons",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "3fe4f204-44b9-40d8-bc0d-3644bf51b046",
+        "99b4f43d-375b-4455-949f-c60c46ca4026",
+        "c0b30158-3652-4f03-8123-bf03fb8ab990",
+        "fd46ef4d-70a1-46ec-a31a-101599c9631c",
+        "f7eeda0b-3256-43ab-aaf5-2ba97d558f91",
+        "0afe36f9-4004-4b62-97bd-72a5fe6f1dea"
+      ],
       "settings": {
+        "product": "bamboo-shirt"
       }
     },
-     "main-product-show": {
-      "type": "main-product-show",
+    "index-homepage": {
+      "type": "index-homepage",
       "disabled": true,
       "settings": {
       }
