@@ -65,8 +65,8 @@
     },
     "template-product": {
       "type": "template-product",
-      "disabled": true,
       "settings": {
+        "product": "bamboo-shirt"
       }
     }
   },
