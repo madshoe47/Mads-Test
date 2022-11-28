@@ -88,23 +88,6 @@
                           </fieldset>
                         {%- endfor -%}
                       {%- endif -%}
-                      {% if option.value == "Size" %}
-                        {%- for option in product.options_with_values -%}
-                          <fieldset class="js product-form__input mt-2">
-                            <legend class="form__label sr-only">Choose {{ option.name }}</legend>
-                            <div class="grid grid-cols-3 gap-3 sm:grid-cols-6">
-                              {%- for value in option.values -%}
-                                <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" name="{{ option.name }}" value="{{ value | escape }}" form="{{ product_form_id }}" class="sr-only" aria-labelledby="size-choice-0-label" {% if option.selected_value == value %}checked{% endif %}>
-                                {%- if option.value == "Size" -%}
-                                  <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" class="-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none ring-gray-700">
-                                    {{ value }}
-                                  </label>
-                                {%- endif -%}
-                              {%- endfor -%}
-                            </div>
-                          </fieldset>
-                        {%- endfor -%}
-                      {% endif %}
                       <script type="application/json">
                         {{ product.variants | json }}
                       </script>
