@@ -1322,6 +1322,9 @@ video {
 .h-\[42px\] {
   height: 42px;
 }
+.h-\[65vh\] {
+  height: 65vh;
+}
 .min-h-\[22px\] {
   min-height: 22px;
 }
