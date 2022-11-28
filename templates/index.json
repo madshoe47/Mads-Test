@@ -224,12 +224,6 @@
   "order": [
     "main-product-show",
     "hero-video",
-    "index-homepage",
-    "image_banner",
-    "rich_text",
-    "featured_collection",
-    "collage",
-    "video",
-    "multicolumn"
+    "index-homepage"
   ]
 }
