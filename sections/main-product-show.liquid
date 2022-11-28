@@ -151,7 +151,7 @@
                       <div class="flex items-center space-x-3">
                         {% for value in option.values %}
                           <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" name="{{ option.name }}" value="{{ value | escape }}" form="{{ product_form_id }}" class="sr-only" aria-labelledby="color-choice-0-label" {% if option.selected_value == value %}checked{% endif %}>
-                          {%- if product.variants[forloop.index0].metafields.color.value and option.value == "Color" -%}
+                          {%- if product.variants[forloop.index0].metafields.color.value and option.value == "Farve" -%}
                             <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" style="background-color: {{ product.variants[forloop.index0].metafields.color.value }}" class="-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none ring-gray-700">
                               &nbsp;
                             </label>
@@ -178,14 +178,14 @@
                   {{ 'products.product.quantity.label' | t }}
                 </label>
                 <div class="product-qty__wrapper grid grid-cols-3 border border-black" x-data="{
-                                                                                                                                                                                                            qty: 1,
-                                                                                                                                                                                                            minus(value) {
-                                                                                                                                                                                                              (this.qty == 1) ? this.qty = 1 : this.qty -= value;
-                                                                                                                                                                                                            },
-                                                                                                                                                                                                            plus(value) {
-                                                                                                                                                                                                              this.qty += value;
-                                                                                                                                                                                                            }
-                                                                                                                                                                                                          }">
+                                                                                                                                                                                                                                qty: 1,
+                                                                                                                                                                                                                                minus(value) {
+                                                                                                                                                                                                                                  (this.qty == 1) ? this.qty = 1 : this.qty -= value;
+                                                                                                                                                                                                                                },
+                                                                                                                                                                                                                                plus(value) {
+                                                                                                                                                                                                                                  this.qty += value;
+                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                              }">
 
                   <button type="button" class=" min-h-[44px] w-full flex items-center justify-center cursor-pointer" @click="minus(1)">
                     <span class="sr-only">{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}</span>
@@ -211,27 +211,27 @@
 
             {% when 'checkout_buttons' %}
               <div class="my-3" x-data="{
-                                                                                                                                              qty: 1,
-                                                                                                                                              addToCart(){
-                                                                                                                                                let formData = new FormData($refs.product_form);
+                                                                                                                                                                qty: 1,
+                                                                                                                                                                addToCart(){
+                                                                                                                                                                  let formData = new FormData($refs.product_form);
                   
-                                                                                                                                                fetch('/cart/add.js', {
-                                                                                                                                                    method: 'POST',
-                                                                                                                                                    body: formData
-                                                                                                                                                  })
-                                                                                                                                                  .then(response => {
-                                                                                                                                                    return response.json();
-                                                                                                                                                  })
-                                                                                                                                                  .then(response => {
-                                                                                                                                                    this.$dispatch('cart-updated');
-                                                                                                                                                    this.$dispatch('toggle-cart');
-                                                                                                                                                  })
-                                                                                                                                                  .catch((error) => {
-                                                                                                                                                    console.error('Error:', error);
-                                                                                                                                                  });
+                                                                                                                                                                  fetch('/cart/add.js', {
+                                                                                                                                                                      method: 'POST',
+                                                                                                                                                                      body: formData
+                                                                                                                                                                    })
+                                                                                                                                                                    .then(response => {
+                                                                                                                                                                      return response.json();
+                                                                                                                                                                    })
+                                                                                                                                                                    .then(response => {
+                                                                                                                                                                      this.$dispatch('cart-updated');
+                                                                                                                                                                      this.$dispatch('toggle-cart');
+                                                                                                                                                                    })
+                                                                                                                                                                    .catch((error) => {
+                                                                                                                                                                      console.error('Error:', error);
+                                                                                                                                                                    });
                   
-                                                                                                                                              }
-                                                                                                                                            }">
+                                                                                                                                                                }
+                                                                                                                                                              }">
                 {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', x-ref: 'product_form' -%}
                   <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id}}">
                   <button type="button" name="add" @click="addToCart()" class="add-to-cart-button  button__primary w-full justify-center" {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
