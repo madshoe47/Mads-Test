@@ -4,6 +4,7 @@
 
 {%- assign product = section.settings.product -%}
 {% assign selected_variant = product.selected_or_first_available_variant %}
+{%- assign product_form_id = 'product-form-' | append: section.id -%}
 
 <style>
   .swiper {
@@ -86,9 +87,7 @@
   }
 </style>
 
-<script src="{{ 'product-model.js' | asset_url }}" defer></script>
-
-<div x-data="{ productModalOpen: false }">
+<div>
 
   <div class="max-w-7xl mx-auto my-8">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -123,208 +122,141 @@
       </div>
 
       <div class="product--information p-2">
-        {% form 'product', product, id: 'product-form', novalidate: 'novalidate' %}
-          <input type="hidden" name="id" value="{{ selected_variant.id }}">
 
-          {% for block in section.blocks %}
-            {% case block.type %}
-              {% when 'vendor' %}
-                <div class="my-3">
-                  <span class="text-xs text-gray-500">{{ product.vendor }}</span>
-                </div>
-              {% when 'title' %}
-                <div class="my-3">
-                  <h1 class="text-3xl text-gray-900">{{ product.title }}</h1>
-                </div>
-              {% when 'price' %}
-                <div class="my-3" id="price-{{ section.id }}">
-                  <span class="text-base text-gray-500 line-through">{{ selected_variant.compare_at_price | money }}</span>
-                  <span class="text-lg text-gray-900">{{ selected_variant.price | money }}</span>
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'vendor' %}
+              <div class="my-3">
+                <span class="text-xs text-gray-500">{{ product.vendor }}</span>
+              </div>
+            {% when 'title' %}
+              <div class="my-3">
+                <h1 class="text-3xl text-gray-900">{{ product.title }}</h1>
+              </div>
+            {% when 'price' %}
+              <div class="my-3" id="price-{{ section.id }}">
+                <span class="text-base text-gray-500 line-through">{{ selected_variant.compare_at_price | money }}</span>
+                <span class="text-lg text-gray-900">{{ selected_variant.price | money }}</span>
 
-                  {% if selected_variant.price < selected_variant.compare_at_price %}
-                    <span class="px-5 py-1 text-sm font-bold bg-red-500 rounded-full text-white mx-4">Sale</span>
-                  {% endif %}
-                </div>
-              {% when 'variant_selector' %}
-                <div class="my-3">
-                  {% unless product.has_only_default_variant %}
-                    <variant-selector data-url="{{ product.url }}" data-section="{{ section.id }}">
-                      {% for option in product.options_with_values %}
-                        <label for="Option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
+                {% if selected_variant.price < selected_variant.compare_at_price %}
+                  <span class="px-5 py-1 text-sm font-bold bg-red-500 rounded-full text-white mx-4">Sale</span>
+                {% endif %}
+              </div>
+            {% when 'variant_selector' %}
+              <div class="my-3">
+                {% unless product.has_only_default_variant %}
+                  <variant-selector data-url="{{ product.url }}" data-section="{{ section.id }}">
+                    {% for option in product.options_with_values %}
+                      <label for="Option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
+                      <div class="flex items-center space-x-3">
+                        {% for value in option.values %}
+                          <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" name="{{ option.name }}" value="{{ value | escape }}" form="{{ product_form_id }}" class="sr-only" aria-labelledby="color-choice-0-label" {% if option.selected_value == value %}checked{% endif %}>
+                          {%- if product.variants[forloop.index0].metafields.color.value and option.value == "Color" -%}
+                            <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" style="background-color: {{ product.variants[forloop.index0].metafields.color.value }}" class="-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none ring-gray-700">
+                              &nbsp;
+                            </label>
+                          {%- else -%}
+                            <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" class="-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none ring-gray-700">
+                              {{ value }}
+                            </label>
+                          {%- endif -%}
+                        {% endfor %}
+                      </div>
+                      <script type="application/json">
+                        {{ product.variants | json }}
+                      </script>
 
-                        <div class="my-2">
-                          <select name="options[{{ option.name | escape }}]" id="Option-{{ section.id }}-{{ forloop.index0 }}" class="w-full border py-3 px-3">
-                            {% for value in option.values %}
-                              <option value="{{ value | escape }}" {% if option.selected_value == value %}
-                                selected="selected"
-                                {% endif %}>
-                                {{ value }}
-                              </option>
-                            {% endfor %}
-                          </select>
-                        </div>
+                    {% endfor %}
+                  </variant-selector>
+                {% endunless %}
+              </div>
 
-                        <script type="application/json">
-                          {{ product.variants | json }}
-                        </script>
 
-                      {% endfor %}
-                    </variant-selector>
-                  {% endunless %}
-                </div>
+            {% when 'quantity' %}
+              <div class="product-form__input product-form__quantity" {{ block.shopify_attributes }}>
+                <label class="form__label sr-only" for="Quantity-{{ section.id }}">
+                  {{ 'products.product.quantity.label' | t }}
+                </label>
+                <div class="product-qty__wrapper grid grid-cols-3 border border-black" x-data="{
+                                                                                                        qty: 1,
+                                                                                                        minus(value) {
+                                                                                                          (this.qty == 1) ? this.qty = 1 : this.qty -= value;
+                                                                                                        },
+                                                                                                        plus(value) {
+                                                                                                          this.qty += value;
+                                                                                                        }
+                                                                                                      }">
 
-              {% when 'quantity' %}
-                <div class="my-3">
-                  <label for="Quantity-{{ section.id }}">Quantity</label>
-
-                  <div class="my-2">
-                    <input type="number" name="quantity" id="Quantity-{{ section.id }}" value="1" min="1" class="w-full border px-3 py-3">
-                  </div>
-                </div>
-              {% when 'description' %}
-                <div class="my-3">
-                  <p class="text-gray-700">{{ product.description }}</p>
-                </div>
-
-              {% when 'checkout_buttons' %}
-                <div class="my-3">
-                  <button type="submit" name="add" class="w-full px-6 py-4 bg-gray-900 text-white hover:bg-gray-700 rounded-sm my-2"
-                    {% if selected_variant.available == false %}
-                    disabled
-                    {% endif %}>
-                    {% if selected_variant.available == false %}
-                      Sold out
-                    {% else %}
-                      Add to cart
-                    {% endif %}
+                  <button type="button" class=" min-h-[44px] w-full flex items-center justify-center cursor-pointer" @click="minus(1)">
+                    <span class="sr-only">{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}</span>
+                    {% render 'icon-minus' %}
                   </button>
+
+                  <input type="number" x-model="qty" name="quantity" class="product-qty__input border-x text-center border-black" value="1" min="1" max="10">
+
+                  <button type="button" class=" min-h-[44px] w-full flex items-center justify-center cursor-pointer" @click="plus(1)">
+                    <span class="sr-only">{{ 'products.product.quantity.increase' | t: product: product.title | escape }}</span>
+                    {% render 'icon-plus' %}
+                  </button>
+
                 </div>
-              {% else %}
 
-            {% endcase %}
-          {% endfor %}
-        {% endform %}
-      </div>
-    </div>
-  </div>
+              </div>
 
 
-  <style>
-    .media model-viewer,
-    .media > * {
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-  </style>
+            {% when 'description' %}
+              <div class="my-3">
+                <p class="text-gray-700">{{ product.description }}</p>
+              </div>
 
-  <div id="productModelModal">
-    <div x-show="productModalOpen" class="w-full h-full z-50 items-center fixed inset-0">
-      <div class="relative w-full h-full bg-white">
-        <div class="relative">
-          <div class="flex justify-between items-start p-5 border-b">
-            <h2 class="text-xl font-bold text-gray-700">3D Model Preview</h2>
-            <button x-on:click="productModalOpen = false" class="text-gray-400 bg-transparent hover:text-gray-700 rounded text-sm p-2 ml-auto inline-flex items-center">
-              {% render 'icon-close' %}
-            </button>
-          </div>
+            {% when 'checkout_buttons' %}
+              <div class="my-3" x-data="{
+                                                    qty: 1,
+                                                    addToCart(){
+                                                      let formData = new FormData($refs.product_form);
+                  
+                                                      fetch('/cart/add.js', {
+                                                          method: 'POST',
+                                                          body: formData
+                                                        })
+                                                        .then(response => {
+                                                          return response.json();
+                                                        })
+                                                        .then(response => {
+                                                          this.$dispatch('cart-updated');
+                                                          this.$dispatch('toggle-cart');
+                                                        })
+                                                        .catch((error) => {
+                                                          console.error('Error:', error);
+                                                        });
+                  
+                                                    }
+                                                  }">
+                {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', x-ref: 'product_form' -%}
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id}}">
+                  <button type="button" name="add" @click="addToCart()" class="add-to-cart-button  button__primary w-full justify-center" {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+                    <span>
+                      {%- if product.selected_or_first_available_variant.available -%}
+                        {{ 'products.product.add_to_cart' | t }}
+                      {%- else -%}
+                        {{ 'products.product.sold_out' | t }}
+                      {%- endif -%}
+                    </span>
+                  </button>
+                  {%- if block.settings.show_dynamic_checkout -%}
+                    {{ form | payment_button }}
+                  {%- endif -%}
+                {%- endform -%}
+              </div>
+          {% endcase %}
+        {% endfor %}
 
-          <div id="body" class="media block relative" style="padding-top: min(calc(100vh - 5rem), 100%);"></div>
-        </div>
       </div>
     </div>
   </div>
 
 </div>
-<script>
-  class VariantSelector extends HTMLElement {
-    constructor() {
-      super();
-      this.addEventListener("change", this.onVariantChange);
-    }
-    onVariantChange() {
-      window.setInterval(function() {
-        var uri = window.location.toString();
-        if (uri.indexOf("?") > 0) {
-          var clean_uri = uri.substring(0, uri.indexOf("?"));
-          window.history.replaceState({}, document.title, clean_uri);
-        }
-      }, 0);
-      this.getSelectedOptions();
-      this.getSelectedVariant();
-      if (this.currentVariant) {
-        this.updateURL();
-        this.updateFormID();
-        this.updatePrice();
-      };
-    }
-    getSelectedOptions() {
-      this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
-      console.log(this.options);
-    }
-    getVariantJSON() {
-      this.variantData = this.variantData || JSON.parse(this.querySelector('[type="application/json"]').textContent);
-      return this.variantData;
-    }
-    getSelectedVariant() {
-      this.currentVariant = this.getVariantJSON().find((variant) => {
-        const findings = !variant.options.map((option, index) => {
-          return this.options[index] === option;
-        }).includes(false);
-        if (findings) 
-          return variant;
-        
 
-
-
-      });
-      console.log(this.currentVariant);
-    }
-    updateURL() {
-      if (!this.currentVariant) 
-        return;
-      
-
-
-
-      window.history.replaceState({}, '', `${
-        this.dataset.url
-      }?variant=${
-        this.currentVariant.id
-      }`);
-    }
-    updateFormID() {
-      const form_input = document.querySelector("#product-form").querySelector('input[name="id"]');
-      form_input.value = this.currentVariant.id;
-    }
-    updatePrice() {
-      fetch(`${
-        this.dataset.url
-      }?variant=${
-        this.currentVariant.id
-      }&section_id=${
-        this.dataset.section
-      }`).then((response) => response.text()).then((responseText) => {
-        const id = `price-${
-          this.dataset.section
-        }`;
-        const html = new DOMParser().parseFromString(responseText, 'text/html');
-        const oldPrice = document.getElementById(id);
-        const newPrice = html.getElementById(id);
-        if (oldPrice && newPrice) 
-          oldPrice.innerHTML = newPrice.innerHTML;
-        
-
-
-
-      });
-    }
-  }
-  customElements.define("variant-selector", VariantSelector);
-</script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
