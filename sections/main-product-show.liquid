@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js" defer></script>
 
+{%- assign product = section.settings.product -%}
 {% assign selected_variant = product.selected_or_first_available_variant %}
 
 <style>
@@ -218,6 +219,8 @@
           return variant;
         
 
+
+
       });
       console.log(this.currentVariant);
     }
@@ -225,6 +228,8 @@
       if (!this.currentVariant) 
         return;
       
+
+
 
       window.history.replaceState({}, '', `${
         this.dataset.url
@@ -253,6 +258,8 @@
         if (oldPrice && newPrice) 
           oldPrice.innerHTML = newPrice.innerHTML;
         
+
+
 
       });
     }
@@ -315,6 +322,24 @@
         "name": "Checkout Buttons",
         "limit": 1
       }
+    ],
+    "settings": [
+      {
+        "type": "header",
+        "content": "Product"
+      }, {
+        "type": "select",
+        "id": "product",
+        "label": "Product",
+        "options": [
+          {
+            "value": "",
+            "label": "Select a product"
+          }
+        ],
+        "info": "Select a product to display"
+      }
     ]
+
   }
 {% endschema %}
