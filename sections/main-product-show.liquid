@@ -11,6 +11,11 @@
     height: 100%;
   }
 
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: #000;
+  }
+
   .swiper-slide {
     text-align: center;
     font-size: 18px;
@@ -93,7 +98,7 @@
             <div class="swiper-wrapper">
               {% for media in product.media %}
                 <div class="swiper-slide">
-                  <div class="h-[100vw] overflow-hidden p-2">
+                  <div class="overflow-hidden p-2">
                     {% render 'product-media', media: media %}
                   </div>
                 </div>
@@ -331,7 +336,7 @@
         loop: true,
         spaceBetween: 10,
         slidesPerView: 4,
-        freeMode: true,
+        freeMode: false,
         watchSlidesProgress: true
       });
       var swiper2 = new Swiper(".mySwiper2", {
