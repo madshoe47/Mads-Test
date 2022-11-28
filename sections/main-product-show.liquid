@@ -108,7 +108,7 @@
               <div class="swiper-wrapper">
                 {% for media in product.media %}
                   <div class="swiper-slide">
-                    <div class="h-[100vw] overflow-hidden p-2">
+                    <div class="overflow-hidden p-2">
                       {% render 'product-media', media: media %}
                     </div>
                   </div>
@@ -116,11 +116,8 @@
               </div>
             </div>
 
-
-            <div class="swiper-pagination"></div>
-
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev text-black"></div>
+            <div class="swiper-button-next text-black"></div>
           </div>
         </div>
       </div>
