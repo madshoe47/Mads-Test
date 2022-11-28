@@ -22,11 +22,18 @@
       "disabled": true,
       "settings": {
       }
+    },
+    "template-product": {
+      "type": "template-product",
+      "disabled": true,
+      "settings": {
+      }
     }
   },
   "order": [
     "hero-video",
     "main-product-show",
-    "index-homepage"
+    "index-homepage",
+    "template-product"
   ]
 }
