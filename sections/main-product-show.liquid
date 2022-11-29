@@ -323,14 +323,11 @@
         }).includes(false);
         if (findings) 
           return variant;
-        console.log(this.currentVariant);
         
       });
     }
     updateFormID() {
       const form_input = document.querySelector(`#product-form-${this.dataset.section}`).querySelector('input[name="id"]'); 
-      console.log(this.currentVariant.id);
-      console.log('Dette er form input', form_input);
       form_input.value = this.currentVariant.id;
     }
     updatePrice() {
