@@ -127,6 +127,7 @@
                 addToCart(){
                     console.log('add to cart');
                   let formData = new FormData($refs.product_form);
+                  console.log(formData);
 
                   fetch('/cart/add.js', {
                       method: 'POST',
