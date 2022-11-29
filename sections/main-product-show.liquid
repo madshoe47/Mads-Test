@@ -273,7 +273,7 @@
           window.history.replaceState({}, document.title, clean_uri);
         }
       }, 0);
-      this.getSelectedOptions();
+      this.updateOptions();
       this.getSelectedVariant();
       if (this.currentVariant) {
         this.updateFormID();
@@ -282,7 +282,7 @@
       };
     }
 
-    getSelectedOptions() {
+    updateOptions() {
       this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
      
     }
