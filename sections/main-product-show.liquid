@@ -144,7 +144,7 @@
               }"
      >
           {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', x-ref: 'product_form' -%}
-                 
+                 <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
 
 
                     {% for block in section.blocks %}
@@ -169,7 +169,7 @@
                             {% when 'variant_selector' %}
                                {%- unless product.has_only_default_variant -%}
                 <variant-selects class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
-                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                
                   {%- for option in product.options_with_values -%}
                     <div class="product-form__input product-form__input--dropdown">
                       <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
@@ -368,7 +368,7 @@
       }`);
     }
     updateFormID() {
-      const form_input = document.querySelector("#product-form_id").querySelector('input[name="id"]');
+      const form_input = document.querySelector("#product_form_id").querySelector('input[name="id"]');
       form_input.value = this.currentVariant.id;
     }
     updatePrice() {

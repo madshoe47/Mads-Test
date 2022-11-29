@@ -789,7 +789,7 @@ class VariantSelector extends HTMLElement {
       }`);
   }
   updateFormID() {
-    const form_input = document.querySelector("#product-form").querySelector('input[name="id"]');
+    const form_input = document.querySelector("#product_form_id").querySelector('input[name="id"]');
     form_input.value = this.currentVariant.id;
   }
   updatePrice() {
