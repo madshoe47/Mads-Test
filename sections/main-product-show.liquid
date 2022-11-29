@@ -122,7 +122,7 @@
       </div>
 
     <div class="product--information p-2">
-                {% form 'product', product, id: 'product-form', novalidate: 'novalidate' %}
+                {% form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', x-ref: 'product_form' %}
                     <input type="hidden" name="id" value="{{ selected_variant.id }}">
 
                     {% for block in section.blocks %}
