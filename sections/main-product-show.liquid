@@ -390,6 +390,7 @@ class VariantSelects extends HTMLElement {
   }
 
   updateMasterId() {
+    console.log(this.currentVariant);
     this.currentVariant = this.getVariantData().find((variant) => {
       return !variant.options.map((option, index) => {
         return this.options[index] === option;
@@ -397,31 +398,12 @@ class VariantSelects extends HTMLElement {
     });
   }
 
-  updateMedia() {
-    if (!this.currentVariant) return;
-    if (!this.currentVariant.featured_media) return;
-
-    const mediaGallery = document.getElementById(`MediaGallery-${this.dataset.section}`);
-    mediaGallery.setActiveMedia(`${this.dataset.section}-${this.currentVariant.featured_media.id}`, true);
-
-    const modalContent = document.querySelector(`#ProductModal-${this.dataset.section} .product-media-modal__content`);
-    const newMediaModal = modalContent.querySelector(`[data-media-id="${this.currentVariant.featured_media.id}"]`);
-    modalContent.prepend(newMediaModal);
-  }
-
-  
-
-  updateShareUrl() {
-    const shareButton = document.getElementById(`Share-${this.dataset.section}`);
-    if (!shareButton) return;
-    shareButton.updateUrl(`${window.shopUrl}${this.dataset.url}?variant=${this.currentVariant.id}`);
-  }
-
   updateVariantInput() {
     const productForms = document.querySelectorAll(product_form_id);
     productForms.forEach((productForm) => {
       const input = productForm.querySelector('input[name="id"]');
       input.value = this.currentVariant.id;
+      console.log(input.value);
       console.log(this.currentVariant.id);
       input.dispatchEvent(new Event('change', { bubbles: true }));
     });
@@ -496,7 +478,10 @@ class VariantSelects extends HTMLElement {
 
   getVariantData() {
     this.variantData = this.variantData || JSON.parse(this.querySelector('[type="application/json"]').textContent);
+    console.log(this.variantData);
     return this.variantData;
+
+    
   }
 }
 
