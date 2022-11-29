@@ -173,7 +173,7 @@
                           <legend class="form__label font-medium py-2">{{ option.name }}</legend>
                             <div class="grid grid-cols-4 md:grid-cols-5 gap-2 ">
                               {%- for value in option.values -%}
-                                <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                                <input class="sr-only" type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
                                       name="{{ option.name }}"
                                       value="{{ value | escape }}"
                                       form="{{ product_form_id }}"
