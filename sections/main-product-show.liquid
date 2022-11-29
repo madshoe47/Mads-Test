@@ -171,7 +171,7 @@
                             {% when 'variant_selector' %}
                                 <div class="my-3">
                                     {% unless product.has_only_default_variant %}
-                                        <variant-selector data-url="{{ product.url }}" data-section="{{ section.id }}">
+                                        <variant-selects data-url="{{ product.url }}" data-section="{{ section.id }}">
                                             {% for option in product.options_with_values %}
                                                 <label for="Option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
 
@@ -199,7 +199,7 @@
                                                 </script>
 
                                             {% endfor %}
-                                        </variant-selector>
+                                        </variant-selects>
                                     {% endunless %}
                                 </div>
 
