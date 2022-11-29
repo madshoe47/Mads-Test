@@ -286,7 +286,7 @@
 
 </div>
 
-{%- comment -%} <script>
+<script>
   class VariantSelector extends HTMLElement {
     constructor() {
       super();
@@ -330,7 +330,7 @@
       console.log(this.currentVariant);
     }
     updateFormID() {
-      const form_input = document.querySelector("#product_form_id").querySelector('input[name="variant_id"]'); 
+      const form_input = document.querySelector(`#product-form-${this.dataset.section}`).querySelector('input[name="id"]'); 
       console.log(this.currentVariant.id);
       form_input.value = this.currentVariant.id;
     }
@@ -358,124 +358,10 @@
     }
   }
   customElements.define("variant-selects", VariantSelector);
-</script> {%- endcomment -%}
-<script>
-class VariantSelects extends HTMLElement {
-  constructor() {
-    super();
-    this.addEventListener('change', this.onVariantChange);
-  }
-
-  onVariantChange() {
-    this.updateOptions();
-    this.updateMasterId();
-    this.toggleAddButton(true, '', false);
-    /* this.updatePickupAvailability(); */
-    this.removeErrorMessage();
-
-    if (!this.currentVariant) {
-      this.toggleAddButton(true, '', true);
-      this.setUnavailable();
-    } else {
-     /* this.updateMedia();
-      this.updateURL(); */
-      this.updateVariantInput();
-      this.renderProductInfo();
-     /* this.updateShareUrl(); */
-    }
-  }
-
-  updateOptions() {
-    this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
-  }
-
-  updateMasterId() {
-    console.log(this.currentVariant);
-    this.currentVariant = this.getVariantData().find((variant) => {
-      return !variant.options.map((option, index) => {
-        return this.options[index] === option;
-      }).includes(false);
-    });
-  }
-
-  updateVariantInput() {
-    const productForms = document.querySelectorAll(product_form_id);
-    productForms.forEach((productForm) => {
-      const input = productForm.querySelector('input[name="id"]');
-      input.value = this.currentVariant.id;
-      console.log(input);
-      console.log(this.currentVariant.id);
-      input.dispatchEvent(new Event('change', { bubbles: true }));
-    });
-  }
-
-  removeErrorMessage() {
-    const section = this.closest('section');
-    if (!section) return;
-
-    const productForm = section.querySelector(product_form_id);
-    if (productForm) productForm.handleErrorMessage();
-  }
-
-  renderProductInfo() {
-    fetch(`${this.dataset.url}?variant=${this.currentVariant.id}&section_id=${this.dataset.section}`)
-      .then((response) => response.text())
-      .then((responseText) => {
-        const id = `price-${this.dataset.section}`;
-        const html = new DOMParser().parseFromString(responseText, 'text/html')
-        const destination = document.getElementById(id);
-        const source = html.getElementById(id);
-
-        if (source && destination) destination.innerHTML = source.innerHTML;
-
-        const price = document.getElementById(`price-${this.dataset.section}`);
-
-        if (price) price.classList.remove('visibility-hidden');
-        this.toggleAddButton(!this.currentVariant.available, window.variantStrings.soldOut);
-      });
-  }
-
-  toggleAddButton(disable = true, text, modifyClass = true) {
-    const productForm = document.getElementById(product_form_id);
-    console.log(productForm);
-    if (!productForm) return;
-    const addButton = productForm.querySelector('[name="add"]');
-    const addButtonText = productForm.querySelector('[name="add"] > span');
-
-    if (!addButton) return;
-
-    if (disable) {
-      addButton.setAttribute('disabled', 'disabled');
-      if (text) addButtonText.textContent = text;
-    } else {
-      addButton.removeAttribute('disabled');
-      addButtonText.textContent = window.variantStrings.addToCart;
-    }
-
-    if (!modifyClass) return;
-  }
-
-  setUnavailable() {
-    const button = document.getElementById(product_form_id);
-    const addButton = button.querySelector('[name="add"]');
-    const addButtonText = button.querySelector('[name="add"] > span');
-    const price = document.getElementById(`price-${this.dataset.section}`);
-    if (!addButton) return;
-    addButtonText.textContent = window.variantStrings.unavailable;
-    if (price) price.classList.add('visibility-hidden');
-  }
-
-  getVariantData() {
-    this.variantData = this.variantData || JSON.parse(this.querySelector('[type="application/json"]').textContent);
-    console.log(this.variantData);
-    return this.variantData;
-
-    
-  }
-}
-
-customElements.define('variant-selects', VariantSelector);
 </script>
+
+
+
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
