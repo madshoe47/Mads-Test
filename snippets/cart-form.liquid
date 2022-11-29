@@ -21,7 +21,7 @@
             {% for item in cart.items %}
               <div class="cart-item">
                 <div class="flex py-3 border-color w-full items-center md:items-start relative
-                                                                                                            {% unless forloop.last %} border-b border-gray-400 {% endunless %}">
+                                                                                                                                {% unless forloop.last %} border-b border-gray-400 {% endunless %}">
                   <div class="w-4/12">
                     {% if item.image %}
                       {{ item.image | image_url: width: 400 | image_tag: loading: 'lazy', class:'w-full pr-3' }}
@@ -85,12 +85,12 @@
                     {% endif %}
 
                     <div class="flex w-5/6 md:w-1/2 mt-2" x-data="{ qty: {{ item.quantity }}}">
-                      <button type="button" title="decrease quantity" @click.debounce="loading = true; ups.updateQuantity({{ forloop.index }}, --qty);" class="text-center cursor-pointer p-1 border border-gray-600 w-3/12">
+                      <button type="button" title="decrease quantity" @click.debounce="loading = true; ups.updateQuantity({{ item.quantity }}, --qty);" class="text-center cursor-pointer p-1 border border-gray-600 w-3/12">
                         &minus;
                       </button>
                       <input class="text-center bg-white border-t border-b border-gray-600 w-6/12 border-l-0 border-r-0" type="number" min="1" size="2" value="{{ item.quantity }}" name="quantity">
 
-                      <button type="button" title="increase quantity" @click.debounce="loading = true; ups.updateQuantity({{ forloop.index }}, ++qty)" class="text-center cursor-pointer  p-1 border border-gray-600 w-3/12">
+                      <button type="button" title="increase quantity" @click.debounce="loading = true; ups.updateQuantity({{ forloop.index[item.quantity] }}, ++qty)" class="text-center cursor-pointer  p-1 border border-gray-600 w-3/12">
                         &plus;
                       </button>
                     </div>
