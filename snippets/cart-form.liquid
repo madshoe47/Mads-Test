@@ -146,6 +146,7 @@
       </div>
     {% else %}
       <div class="empty-cart text-center max-w-xs md:max-w-md px-4">
+        {% render 'icon-cart', class: 'mx-auto w-8 h-8' %}
         <h4 class="text-lg heading-font py-2 !font-bold">
           {{ 'general.cart.cart_empty_title_html' | t }}
         </h4>
