@@ -302,7 +302,6 @@
       this.getSelectedOptions();
       this.getSelectedVariant();
       if (this.currentVariant) {
-        this.updateURL();
         this.updateFormID();
         this.updatePrice();
         this.getFormData();
@@ -311,7 +310,6 @@
 
     getSelectedOptions() {
       this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
-      console.log(this.options);
      
     }
     getVariantJSON() {
@@ -325,6 +323,7 @@
         }).includes(false);
         if (findings) 
           return variant;
+        console.log(this.currentVariant);
         
       });
     }
