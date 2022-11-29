@@ -171,7 +171,7 @@
                             {% when 'variant_selector' %}
                                 <div class="my-3">
                                     {% unless product.has_only_default_variant %}
-                                        <variant-selects data-url="{{ product.url }}" data-section="{{ section.id }}">
+                                        <variant-selector data-url="{{ product.url }}" data-section="{{ section.id }}">
                                             {% for option in product.options_with_values %}
                                                 <label for="Option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
 
@@ -199,7 +199,7 @@
                                                 </script>
 
                                             {% endfor %}
-                                        </variant-selects>
+                                        </variant-selector>
                                     {% endunless %}
                                 </div>
 
@@ -279,7 +279,7 @@
     if (!isIE()) return;
     const hiddenInput = document.querySelector('#{{ product_form_id }} input[name="id"]');
     const noScriptInputWrapper = document.createElement('div');
-    const variantSwitcher = document.querySelector('variant-radios[data-section="{{ section.id }}"]') || document.querySelector('variant-selects[data-section="{{ section.id }}"]');
+    const variantSwitcher = document.querySelector('variant-radios[data-section="{{ section.id }}"]') || document.querySelector('variant-selector[data-section="{{ section.id }}"]');
     noScriptInputWrapper.innerHTML = document.querySelector('.product-form__noscript-wrapper-{{ section.id }}').textContent;
     variantSwitcher.outerHTML = noScriptInputWrapper.outerHTML;
 
