@@ -121,8 +121,32 @@
       </div>
 
     <div class="product--information p-2" 
+         x-data="{ 
+                quantity: 1,
+                addToCart(){
+                  let formData = new FormData($refs.product_form);
+                  fetch('/cart/add.js', {
+                      method: 'POST',
+                      body: formData
+                    })
+                    .then(response => {
+                      return response.json();
+                      console.log('response', response);
+                    })
+                    .then(response => {
+                      this.$dispatch('cart-updated');
+                      this.$dispatch('toggle-cart');
+                    })
+                    .catch((error) => {
+                      console.error('Error:', error);
+                    });
+                }
+              }"
      >
-       
+          {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', x-ref: 'product_form' -%}
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+
                     {% for block in section.blocks %}
                         {% case block.type %}
                             {% when 'vendor' %}
@@ -258,29 +282,8 @@
 
                             {% when 'checkout_buttons' %}
                                 <div class="my-3"
-                                 x-data="{ 
-                quantity: 1,
-                addToCart(){
-                  let formData = new FormData($refs.product_form);
-                  fetch('/cart/add.js', {
-                      method: 'POST',
-                      body: formData
-                    })
-                    .then(response => {
-                      return response.json();
-                      console.log('response', response);
-                    })
-                    .then(response => {
-                      this.$dispatch('cart-updated');
-                      this.$dispatch('toggle-cart');
-                    })
-                    .catch((error) => {
-                      console.error('Error:', error);
-                    });
-                }
-              }">
-              {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', x-ref: 'product_form' -%}
-                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                                >
+           
                                     <button type="button" name="add" @click="addToCart()" class="w-full px-6 py-4 bg-gray-900 text-white hover:bg-gray-700 rounded-sm my-2"
                                         {% if product.selected_or_first_available_variant.available == false %}
                                             disabled
@@ -292,12 +295,13 @@
                                             Add to cart
                                         {% endif %}
                                     </button>
-                                    {%- endform -%}
+                                    
                                 </div>
                             {% else %}
                                 
                         {% endcase %}
                     {% endfor %}
+                    {%- endform -%}
             </div>
         </div>
 
