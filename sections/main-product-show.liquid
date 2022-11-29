@@ -230,6 +230,7 @@
                       return response.json();
                     })
                     .then(response => {
+                        console.log('det gick bra', response);
                       this.$dispatch('cart-updated');
                       this.$dispatch('toggle-cart');
                     })
