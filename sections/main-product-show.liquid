@@ -144,7 +144,7 @@
               }"
      >
           {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', x-ref: 'product_form' -%}
-                 <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                 <input type="hidden" name="variant_id" value="{{ product.selected_or_first_available_variant.id }}">
 
 
                     {% for block in section.blocks %}
@@ -354,22 +354,8 @@
       });
       console.log(this.currentVariant);
     }
-    updateURL() {
-      if (!this.currentVariant) 
-        return;
-      
-
-
-
-      window.history.replaceState({}, '', `${
-        this.dataset.url
-      }?variant=${
-        this.currentVariant.id
-      }`);
-    }
     updateFormID() {
-      const form_input = document.querySelector("#product_form_id").querySelector('input[name="id"]');
-      console.log(form_input);
+      const form_input = document.querySelector("#product_form_id").querySelector('input[name="variant_id"]'); 
       console.log(this.currentVariant.id);
       form_input.value = this.currentVariant.id;
     }
