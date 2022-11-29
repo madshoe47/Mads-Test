@@ -133,7 +133,6 @@
                       return response.json();
                     })
                     .then(response => {
-                        console.log(response)
                       this.$dispatch('cart-updated');
                       this.$dispatch('toggle-cart');
                     })
@@ -312,7 +311,7 @@
 
     getSelectedOptions() {
       this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
-      console.log(this.options);
+     
     }
     getVariantJSON() {
       this.variantData = this.variantData || JSON.parse(this.querySelector('[type="application/json"]').textContent);
@@ -327,7 +326,6 @@
           return variant;
         
       });
-      console.log(this.currentVariant);
     }
     updateFormID() {
       const form_input = document.querySelector(`#product-form-${this.dataset.section}`).querySelector('input[name="id"]'); 
