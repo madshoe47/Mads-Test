@@ -291,6 +291,7 @@
       return this.variantData;
     }
     getSelectedVariant() {
+        console.log(this.currentVariant);
       this.currentVariant = this.getVariantJSON().find((variant) => {
         const findings = !variant.options.map((option, index) => {
           return this.options[index] === option;
