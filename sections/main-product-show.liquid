@@ -126,7 +126,7 @@
                 quantity: 1,
                 addToCart(){
                     console.log('add to cart');
-                    console.log(selected_variant);
+                    console.log(product.selected_or_first_available_variant.id);
                   let formData = new FormData($refs.product_form);
 
                   fetch('/cart/add.js', {
@@ -148,7 +148,7 @@
                 }
               }">
                 {% form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', x-ref: 'product_form' %}
-                    <input type="hidden" name="id" value="{{ selected_variant.id }}">
+                     <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
 
                     {% for block in section.blocks %}
                         {% case block.type %}
