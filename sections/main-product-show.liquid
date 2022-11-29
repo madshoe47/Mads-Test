@@ -289,7 +289,7 @@
     noScriptInputWrapper.innerHTML = document.querySelector('.product-form__noscript-wrapper-{{ section.id }}').textContent;
     variantSwitcher.outerHTML = noScriptInputWrapper.outerHTML;
 
-    document.querySelector('#Variants-{{ section.id }}').addEventListener('change', function(event) {
+    document.querySelector('#Option-{{ section.id }}-{{ forloop.index0 }}').addEventListener('change', function(event) {
       hiddenInput.value = event.currentTarget.value;
     });
   });
