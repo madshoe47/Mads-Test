@@ -4,11 +4,11 @@ window.Alphine = Alpine
 Alpine.start()
 
 let ups = {
-    updateQuantity(line, quantity) {
+    updateQuantity(line, qty) {
         fetch('/cart/change.js', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ quantity: quantity, line: line })
+            body: JSON.stringify({ quantity: qty, line: line })
         }).then(response => response.json())
             .then(data => {
                 // fire javascript event on window

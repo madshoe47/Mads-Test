@@ -2992,14 +2992,14 @@ __webpack_require__.r(__webpack_exports__);
 window.Alphine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
 var ups = {
-  updateQuantity: function updateQuantity(line, quantity) {
+  updateQuantity: function updateQuantity(line, qty) {
     fetch('/cart/change.js', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        quantity: quantity,
+        quantity: qty,
         line: line
       })
     }).then(function (response) {
