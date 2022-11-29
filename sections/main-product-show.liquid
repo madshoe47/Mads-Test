@@ -259,7 +259,7 @@
                             {% when 'checkout_buttons' %}
                                 <div class="my-3"
                                  x-data="{ 
-                qty: 1,
+                quantity: 1,
                 addToCart(){
                   let formData = new FormData($refs.product_form);
                   fetch('/cart/add.js', {
