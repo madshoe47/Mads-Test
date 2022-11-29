@@ -310,8 +310,20 @@
         this.updateURL();
         this.updateFormID();
         this.updatePrice();
+        this.getFormData();
       };
     }
+
+    getFormData() {
+      const formData = new FormData(this.form);
+      const data = {};
+      for (const [key, value] of formData.entries()) {
+        data[key] = value;
+      }
+      console.log('data', data);
+      return data;
+    }
+
     getSelectedOptions() {
       this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
       console.log(this.options);
