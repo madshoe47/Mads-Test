@@ -1,5 +1,53 @@
 {
   "current": {
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo": "shopify:\/\/shop_images\/Logo_Mads_Hoe_Motorsport.png",
+          "logo_width": 150,
+          "logo_position": "middle-left",
+          "menu": "main-menu",
+          "show_line_separator": true,
+          "enable_sticky_header": true,
+          "margin_bottom": 0
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "footer-0": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Quick links",
+              "menu": "footer"
+            }
+          },
+          "footer-1": {
+            "type": "text",
+            "settings": {
+              "heading": "Heading",
+              "subtext": "<p>Share store details, promotions, or brand content with your customers.<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "footer-0",
+          "footer-1"
+        ],
+        "settings": {
+          "show_newsletter": false,
+          "newsletter_title": "",
+          "newsletter_subtitle": "",
+          "newsletter_html": "",
+          "copyright_text": "",
+          "payment_enable": true
+        }
+      }
+    },
+    "content_for_index": [
+
+    ]
   },
   "presets": {
     "Default": {
