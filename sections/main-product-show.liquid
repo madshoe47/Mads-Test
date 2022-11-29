@@ -126,6 +126,7 @@
                 quantity: 1,
                 addToCart(){
                     console.log('add to cart');
+                    console.log(selected_variant);
                   let formData = new FormData($refs.product_form);
 
                   fetch('/cart/add.js', {
