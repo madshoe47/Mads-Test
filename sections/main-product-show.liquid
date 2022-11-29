@@ -170,9 +170,33 @@
                                     {% endif %}
                                 </div>
                             {% when 'variant_selector' %}
-                                <div class="my-3">
-                                    {% unless product.has_only_default_variant %}
-                                        <variant-selects class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+                               {%- unless product.has_only_default_variant -%}
+              {%- if block.settings.picker_type == 'button' -%}
+                <variant-radios class="no-js-hidden block pb-3" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+                    {%- for option in product.options_with_values -%}
+                        <fieldset class="js product-form__input">
+                          <legend class="form__label font-medium py-2">{{ option.name }}</legend>
+                            <div class="grid grid-cols-4 md:grid-cols-5 gap-2 ">
+                              {%- for value in option.values -%}
+                                <input class="sr-only" type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                                      name="{{ option.name }}"
+                                      value="{{ value | escape }}"
+                                      form="{{ product_form_id }}"
+                                      {% if option.selected_value == value %}checked{% endif %}
+                                >
+                                <label class="border p-2 inline-block text-sm text-center border-gray-700" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                                  {{ value }}
+                                </label>
+                              {%- endfor -%}
+                            </div>
+                        </fieldset>
+                    {%- endfor -%}
+                  <script type="application/json">
+                    {{ product.variants | json }}
+                  </script>
+                </variant-radios>
+              {%- else -%}
+                <variant-selects class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
                   {%- for option in product.options_with_values -%}
                     <div class="product-form__input product-form__input--dropdown">
                       <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
@@ -198,8 +222,30 @@
                     {{ product.variants | json }}
                   </script>
                 </variant-selects>
-                                    {% endunless %}
-                                </div>
+              {%- endif -%}
+            {%- endunless -%}
+
+            <noscript class="product-form__noscript-wrapper-{{ section.id }}">
+              <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
+                <label class="form__label" for="Variants-{{ section.id }}">{{ 'products.product.product_variants' | t }}</label>
+                <div class="select">
+                  <select name="id" id="Variants-{{ section.id }}" class="select__select" form="{{ product_form_id }}">
+                    {%- for variant in product.variants -%}
+                      <option
+                        {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+                        {% if variant.available == false %}disabled{% endif %}
+                        value="{{ variant.id }}"
+                      >
+                        {{ variant.title }}
+                        {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+                        - {{ variant.price | money | strip_html }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+               
+                </div>
+              </div>
+            </noscript>
 
                             {% when 'quantity' %}
                                <div class="product-form__input product-form__quantity" {{ block.shopify_attributes }}>
