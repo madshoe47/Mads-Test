@@ -1,5 +1,5 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
-<div class="fixed inset-0 overflow-hidden z-20" x-data="{ showMenu: false }" x-show="showMenu" @toggle-menu.window="showMenu = !showMenu" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+<div class="fixed inset-0 overflow-hidden z-20" x-cloak x-data="{ showMenu: false }" x-show="showMenu" @toggle-menu.window="showMenu = !showMenu" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
   <div class="absolute inset-0 overflow-hidden">
 
     <div class="absolute inset-0 bg-gray-500 bg-opacity-75" x-show="showMenu" x-transition.opacity @click="showMenu = false" aria-hidden="true"></div>
