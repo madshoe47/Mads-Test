@@ -40,6 +40,31 @@
     <link rel="stylesheet" href="{{ 'app.css' | asset_url }}">
     <script src="{{ 'app.js' | asset_url }}" defer></script>
 
+    <style>
+      [x-cloak] {
+        display: none !important;
+      }
+
+      .link-underline {
+        border-bottom-width: 0;
+        background-image: linear-gradient(transparent, transparent), linear-gradient(#fff, #fff);
+        background-size: 0 3px;
+        background-position: 5px 100%;
+        background-repeat: no-repeat;
+        transition: background-size 0.3s ease-in-out;
+        margin-bottom: -1px;
+      }
+
+      .link-underline-black {
+        background-image: linear-gradient(transparent, transparent), linear-gradient(#087500, #087500)
+      }
+
+      .link-underline:hover {
+        background-size: 100% 3px;
+        background-position: 0 100%
+      }
+    </style>
+
     {%- unless settings.type_body_font.system? -%}
       <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
     {%- endunless -%}
@@ -50,13 +75,6 @@
     {%- if settings.predictive_search_enabled -%}
       <link rel="stylesheet" href="{{ 'component-predictive-search.css' | asset_url }}" media="print" onload="this.media='all'">
     {%- endif -%}
-
-    <script>
-      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
-      if (Shopify.designMode) {
-        document.documentElement.classList.add('shopify-design-mode');
-      }
-    </script>
   </head>
 
   <body class="gradient">
@@ -64,7 +82,7 @@
       {{ "accessibility.skip_to_text" | t }}
     </a>
     {% section 'header' %}
-    {% render 'cart-drawer' %}
+    {% render 'cart-drawer', x-cloak %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
