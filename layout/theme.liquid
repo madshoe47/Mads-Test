@@ -38,7 +38,7 @@
     {% render 'head-styles' %}
 
     <link rel="stylesheet" href="{{ 'app.css' | asset_url }}">
-    <script src="{{ 'app.js' | asset_url }}"></script>
+    <script src="{{ 'app.js' | asset_url }}" defer></script>
 
     {%- unless settings.type_body_font.system? -%}
       <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>

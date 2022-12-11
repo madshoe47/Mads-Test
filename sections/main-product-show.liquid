@@ -39,7 +39,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   .swiper {
@@ -267,12 +267,6 @@
     "@type": "Product",
     "name": {{ product.title | json }},
     "url": {{ shop.url | append: product.url | json }},
-    {% if seo_media -%}
-      {%- assign media_size = seo_media.preview_image.width -%}
-      "image": [
-        {{ seo_media | image_url: width: media_size | prepend: "https:" | json }}
-      ],
-    {%- endif %}
     "description": {{ product.description | strip_html | json }},
     {% if product.selected_or_first_available_variant.sku != blank -%}
       "sku": {{ product.selected_or_first_available_variant.sku | json }},
