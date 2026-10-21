@@ -42,11 +42,20 @@
   <body>
 
     {% section 'header' %}
-    {% render 'cart-drawer', x-cloak %}
+    {% render 'cart-drawer' %}
 
     <main role="main">
       {{ content_for_layout }}
     </main>
   </body>
 
-</html>
+</html>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'cart-drawer', x-cloak %}"
+  to: "{% render 'cart-drawer' %}"
+  position: 1243..1269
+{%- endcomment -%}
