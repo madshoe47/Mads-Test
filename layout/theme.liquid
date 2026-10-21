@@ -82,7 +82,7 @@
       {{ "accessibility.skip_to_text" | t }}
     </a>
     {% section 'header' %}
-    {% render 'cart-drawer', x-cloak %}
+    {% render 'cart-drawer' %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
@@ -101,4 +101,13 @@
     {%- endif -%}
 
   </body>
-</html>
+</html>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'cart-drawer', x-cloak %}"
+  to: "{% render 'cart-drawer' %}"
+  position: 2957..2983
+{%- endcomment -%}
